@@ -69,7 +69,7 @@ namespace MISA.CukCuk.Api.Controllers
 
                 //Lấy param
 
-                var storeParamObject = new
+                /*var storeParamObject = new
                 {
                     EmployeeId = employee.EmployeeId.ToString(),
                     EmployeeCode = employee.EmployeeCode,
@@ -91,7 +91,7 @@ namespace MISA.CukCuk.Api.Controllers
                     CreatedBy = employee.CreatedBy,
                     ModifiedDate = employee.ModifiedDate,
                     ModifiedBy = employee.ModifiedBy
-                };
+                };*/
 
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 var properties = employee.GetType().GetProperties();
@@ -100,7 +100,7 @@ namespace MISA.CukCuk.Api.Controllers
                     var propertyName = property.Name;
                     var propertyValue = property.GetValue(employee);
 
-                    if (property.PropertyType == typeof(Guid))
+                    if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
                     {
                         propertyValue = property.GetValue(employee, null).ToString();
                     }
@@ -108,7 +108,7 @@ namespace MISA.CukCuk.Api.Controllers
                 }
 
                 // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_InsertEmployee", commandType: CommandType.StoredProcedure, param: storeParamObject);
+                var rowAffects = dbConnection.Execute("Proc_InsertEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
 
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
@@ -143,29 +143,19 @@ namespace MISA.CukCuk.Api.Controllers
                 IDbConnection dbConnection = new MySqlConnection(connectionString);
 
                 //Lấy param
-                var storeParamObject = new
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                var properties = employee.GetType().GetProperties();
+                foreach (var property in properties)
                 {
-                    EmployeeId = employeeId.ToString(),
-                    EmployeeCode = employee.EmployeeCode,
-                    FullName = employee.FullName,
-                    DateOfBirth = employee.DateOfBirth,
-                    Gender = employee.Gender,
-                    IdentityNumber = employee.IdentityNumber,
-                    IdentityDate = employee.IdentityDate,
-                    IdentityPlace = employee.IdentityPlace,
-                    Email = employee.Email,
-                    PhoneNumber = employee.PhoneNumber,
-                    PersonalTaxCode = employee.PersonalTaxCode,
-                    Salary = employee.Salary,
-                    WorkStatus = employee.WorkStatus,
-                    JoinDate = employee.JoinDate,
-                    DepartmentId = employee.DepartmentId.ToString(),
-                    PositionId = employee.PositionId.ToString(),
-                    CreatedDate = employee.CreatedDate,
-                    CreatedBy = employee.CreatedBy,
-                    ModifiedDate = employee.ModifiedDate,
-                    ModifiedBy = employee.ModifiedBy
-                };
+                    var propertyName = property.Name;
+                    var propertyValue = property.GetValue(employee);
+
+                    if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
+                    {
+                        propertyValue = property.GetValue(employee, null).ToString();
+                    }
+                    dynamicParameters.Add($"@{propertyName}", propertyValue);
+                }
 
                 // Lấy dữ liệu từ Database:
                 var rowAffects = dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: storeParamObject);
