@@ -158,7 +158,7 @@ namespace MISA.CukCuk.Api.Controllers
                 }
 
                 // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: storeParamObject);
+                var rowAffects = dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
 
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
