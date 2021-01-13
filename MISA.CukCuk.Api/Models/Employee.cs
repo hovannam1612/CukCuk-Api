@@ -15,6 +15,11 @@ namespace MISA.CukCuk.Api.Models
         #region Declare
         #endregion
 
+        #region Contructor
+        public Employee() { 
+        }
+        #endregion
+
         #region Property
         /// <summary>
         /// Khóa chính
@@ -103,11 +108,6 @@ namespace MISA.CukCuk.Api.Models
 
         #endregion
         
-        #region Contructor
-        public Employee() { 
-        }
-        #endregion
-
         #region Method
         #endregion
     }
