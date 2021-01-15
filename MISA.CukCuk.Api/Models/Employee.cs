@@ -87,7 +87,7 @@ namespace MISA.CukCuk.Api.Models
         public DateTime? JoinDate { get; set; }
 
         /// <summary>
-        /// Trạng thái công việc
+        /// Trạng thái công việc (0-đã nghỉ việc ; 1:Đang làm việc)
         /// </summary>
         public int WorkStatus { get; set; }
 

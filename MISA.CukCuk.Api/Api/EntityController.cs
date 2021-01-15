@@ -9,43 +9,44 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MISA.CukCuk.Api.Controllers
+namespace MISA.CukCuk.Api.Api
 {
-    /// <summary>
-    /// Api Danh mục nhân viên
-    /// CreatedBy: HVNAM (9/1/2021)
-    /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EntityController<T> : ControllerBase
     {
+        #region Declare
+        DBConnector _dBConnector;
+        #endregion
+        #region Constructor
+        public EntityController()
+        {
+            _dBConnector = new DBConnector();
+        }
+        #endregion
+        #region Method
         /// <summary>
-        /// Lấy toàn bộ dữ liệu nhân viên
+        /// Lấy toàn bộ dữ liệu
         /// </summary>
-        /// <returns>Danh sách khách hàng</returns>
+        /// <returns>Danh sách dữ liệu</returns>
         /// CreatedBy: HVNam (1/9/2020)
         [HttpGet]
-        public IActionResult GetEmployee()
+        public IActionResult Get()
         {
-            try
-            {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-                // Lấy dữ liệu từ Database:
-                var employees = dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
-                // Trả lại dữ liệu cho Client:
-                return Ok(employees);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var obj = _dBConnector.Get<T>();
+            return Ok(obj);
+        }
 
+        /// <summary>
+        /// Lấy dữ liệu theo id
+        /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: HVNAM (1/9/2021)
+        [HttpGet("{entityId}")]
+        public virtual IActionResult GetById(Guid entityId)
+        {
+            var obj = _dBConnector.GetById<T>(entityId);
+            return Ok(obj);
         }
 
         /// <summary>
@@ -68,31 +69,6 @@ namespace MISA.CukCuk.Api.Controllers
                 IDbConnection dbConnection = new MySqlConnection(connectionString);
 
                 //Lấy param
-
-                /*var storeParamObject = new
-                {
-                    EmployeeId = employee.EmployeeId.ToString(),
-                    EmployeeCode = employee.EmployeeCode,
-                    FullName = employee.FullName,
-                    DateOfBirth = employee.DateOfBirth,
-                    Gender = employee.Gender,
-                    IdentityNumber = employee.IdentityNumber,
-                    IdentityDate = employee.IdentityDate,
-                    IdentityPlace = employee.IdentityPlace,
-                    Email = employee.Email,
-                    PhoneNumber = employee.PhoneNumber,
-                    PersonalTaxCode = employee.PersonalTaxCode,
-                    Salary = employee.Salary,
-                    WorkStatus = employee.WorkStatus,
-                    JoinDate = employee.JoinDate,
-                    DepartmentId = employee.DepartmentId.ToString(),
-                    PositionId = employee.PositionId.ToString(),
-                    CreatedDate = employee.CreatedDate,
-                    CreatedBy = employee.CreatedBy,
-                    ModifiedDate = employee.ModifiedDate,
-                    ModifiedBy = employee.ModifiedBy
-                };*/
-
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 var properties = employee.GetType().GetProperties();
                 foreach (var property in properties)
@@ -102,7 +78,14 @@ namespace MISA.CukCuk.Api.Controllers
 
                     if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
                     {
-                        propertyValue = property.GetValue(employee, null).ToString();
+                        if(propertyValue!=null)
+                        {
+                            propertyValue = property.GetValue(employee, null).ToString();
+                        }
+                        else
+                        {
+                            propertyValue = "";
+                        }
                     }
                     dynamicParameters.Add($"@{propertyName}", propertyValue);
                 }
@@ -130,7 +113,7 @@ namespace MISA.CukCuk.Api.Controllers
         /// <returns>Trả về thông tin nhân viên đã được update</returns>
         /// CreatedBy: HVNAM(13/1/2021)
         [HttpPut]
-        public IActionResult Update(Guid employeeId, [FromBody] Employee employee)
+        public IActionResult Update([FromBody] Employee employee)
         {
             try
             {
@@ -170,15 +153,15 @@ namespace MISA.CukCuk.Api.Controllers
             {
                 throw;
             }
-        } 
-        
+        }
+
         /// <summary>
         /// Xóa nhân viên
         /// </summary>
         /// <param name="employeeId">Id nhân viên cần xóa</param>
         /// <returns>Trả về thông báo "Delete success" khi xóa thành công</returns>
         /// CreatedBy: HVNam (13/1/2021)
-        [HttpDelete]
+        [HttpDelete("{employeeId}")]
         public IActionResult Delete(Guid employeeId)
         {
             try
@@ -196,10 +179,9 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     EmployeeId = employeeId.ToString(),
                 };
-
                 // Lấy dữ liệu từ Database:
                 var rowAffects = dbConnection.Execute("Proc_DeleteEmployeeById", commandType: CommandType.StoredProcedure, param: storeParamObject);
-                
+
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
                     return Ok("Delete success");
@@ -211,5 +193,7 @@ namespace MISA.CukCuk.Api.Controllers
                 throw;
             }
         }
+        #endregion
+
     }
 }

@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.CukCuk.Api", "MISA.CukCuk.Api\MISA.CukCuk.Api.csproj", "{135F5844-173D-4A59-96A5-6EBE57132585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.Entity", "MISA.Entity\MISA.Entity.csproj", "{9C684634-D626-41D1-9DAC-B4308561FFDE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.ApplicationCore", "MISA.ApplicationCore\MISA.ApplicationCore.csproj", "{932F7806-0E3B-4AC5-ADDA-95BBF38C7A60}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{135F5844-173D-4A59-96A5-6EBE57132585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{135F5844-173D-4A59-96A5-6EBE57132585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{135F5844-173D-4A59-96A5-6EBE57132585}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C684634-D626-41D1-9DAC-B4308561FFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C684634-D626-41D1-9DAC-B4308561FFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C684634-D626-41D1-9DAC-B4308561FFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C684634-D626-41D1-9DAC-B4308561FFDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{932F7806-0E3B-4AC5-ADDA-95BBF38C7A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{932F7806-0E3B-4AC5-ADDA-95BBF38C7A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{932F7806-0E3B-4AC5-ADDA-95BBF38C7A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{932F7806-0E3B-4AC5-ADDA-95BBF38C7A60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
