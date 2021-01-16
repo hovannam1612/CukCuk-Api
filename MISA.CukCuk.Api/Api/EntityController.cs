@@ -17,6 +17,10 @@ namespace MISA.CukCuk.Api.Api
     {
         #region Declare
         DBConnector _dBConnector;
+
+        //Lấy param có id map với từng đối tượng
+        public object storeParam;
+
         #endregion
         #region Constructor
         public EntityController()
@@ -25,6 +29,7 @@ namespace MISA.CukCuk.Api.Api
         }
         #endregion
         #region Method
+
         /// <summary>
         /// Lấy toàn bộ dữ liệu
         /// </summary>
@@ -37,6 +42,7 @@ namespace MISA.CukCuk.Api.Api
             return Ok(obj);
         }
 
+
         /// <summary>
         /// Lấy dữ liệu theo id
         /// </summary>
@@ -45,7 +51,7 @@ namespace MISA.CukCuk.Api.Api
         [HttpGet("{entityId}")]
         public virtual IActionResult GetById(Guid entityId)
         {
-            var obj = _dBConnector.GetById<T>(entityId);
+            var obj = _dBConnector.GetById<T>(storeParam);
             return Ok(obj);
         }
 
@@ -56,55 +62,19 @@ namespace MISA.CukCuk.Api.Api
         /// <returns>Trả về nhân viên được thêm mới</returns>
         /// CreatedBy: HVNAM(9/1/201)
         [HttpPost]
-        public IActionResult Post(Employee employee)
+        public IActionResult Post(T entity)
         {
-            try
+            var rowEffects = _dBConnector.Post<T>(entity);
+            if (rowEffects > 0)
             {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-                //Lấy param
-                DynamicParameters dynamicParameters = new DynamicParameters();
-                var properties = employee.GetType().GetProperties();
-                foreach (var property in properties)
-                {
-                    var propertyName = property.Name;
-                    var propertyValue = property.GetValue(employee);
-
-                    if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
-                    {
-                        if(propertyValue!=null)
-                        {
-                            propertyValue = property.GetValue(employee, null).ToString();
-                        }
-                        else
-                        {
-                            propertyValue = "";
-                        }
-                    }
-                    dynamicParameters.Add($"@{propertyName}", propertyValue);
-                }
-
-                // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_InsertEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-
-                // Trả lại dữ liệu cho Client:
-                if (rowAffects > 0)
-                    return Created("Thêm thành công", employee);
-                else
-                    return NoContent();
+                return Created("created", entity);
             }
-            catch (Exception)
+            else
             {
-                throw;
+                return NoContent();
             }
+
         }
-
         /// <summary>
         /// Sửa nhân viên
         /// </summary>
@@ -113,46 +83,14 @@ namespace MISA.CukCuk.Api.Api
         /// <returns>Trả về thông tin nhân viên đã được update</returns>
         /// CreatedBy: HVNAM(13/1/2021)
         [HttpPut]
-        public IActionResult Update([FromBody] Employee employee)
+        public IActionResult Update(T entity)
         {
-            try
-            {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-                //Lấy param
-                DynamicParameters dynamicParameters = new DynamicParameters();
-                var properties = employee.GetType().GetProperties();
-                foreach (var property in properties)
-                {
-                    var propertyName = property.Name;
-                    var propertyValue = property.GetValue(employee);
-
-                    if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
-                    {
-                        propertyValue = property.GetValue(employee, null).ToString();
-                    }
-                    dynamicParameters.Add($"@{propertyName}", propertyValue);
-                }
-
-                // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-
-                // Trả lại dữ liệu cho Client:
-                if (rowAffects > 0)
-                    return Ok(employee);
-                else
-                    return NoContent();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var rowAffects = _dBConnector.Put<T>(entity);
+            // Trả lại dữ liệu cho Client:
+            if (rowAffects > 0)
+                return Ok(entity);
+            else
+                return NoContent();
         }
 
         /// <summary>
@@ -161,37 +99,14 @@ namespace MISA.CukCuk.Api.Api
         /// <param name="employeeId">Id nhân viên cần xóa</param>
         /// <returns>Trả về thông báo "Delete success" khi xóa thành công</returns>
         /// CreatedBy: HVNam (13/1/2021)
-        [HttpDelete("{employeeId}")]
-        public IActionResult Delete(Guid employeeId)
+        [HttpDelete("{entityId}")]
+        public virtual IActionResult Delete(Guid entityId)
         {
-            try
-            {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-                //Lấy param
-                var storeParamObject = new
-                {
-                    EmployeeId = employeeId.ToString(),
-                };
-                // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_DeleteEmployeeById", commandType: CommandType.StoredProcedure, param: storeParamObject);
-
-                // Trả lại dữ liệu cho Client:
-                if (rowAffects > 0)
-                    return Ok("Delete success");
-                else
-                    return NoContent();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var rowAffects = _dBConnector.Delete<T>(storeParam);
+            if (rowAffects > 0)
+                return Ok("Delete success");
+            else
+                return NoContent();
         }
         #endregion
 

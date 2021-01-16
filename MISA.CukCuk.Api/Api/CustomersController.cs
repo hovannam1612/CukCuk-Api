@@ -13,5 +13,22 @@ namespace MISA.CukCuk.Api.Api
 {
     public class CustomersController : EntityController<Customer>
     {
+        public override IActionResult GetById(Guid entityId)
+        {
+            storeParam = new
+            {
+                CustomerId = entityId.ToString()
+            };
+            return base.GetById(entityId);
+        }
+
+        public override IActionResult Delete(Guid entityId)
+        {
+            storeParam = new
+            {
+                CustomerId = entityId.ToString()
+            };
+            return base.Delete(entityId);
+        }
     }
 }

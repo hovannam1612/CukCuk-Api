@@ -43,14 +43,10 @@ namespace MISA.CukCuk.Api.Api
             return obj;
         }
         
-        public T GetById<T>(Guid entityId)
+        public T GetById<T>(object entityObj)
         {
             var tableName = typeof(T).Name;
-            var storeParamObject = new
-            {
-                property = entityId.ToString()
-            };
-            var obj = _dbConnection.Query<T>($"Proc_Get{tableName}ById", param: storeParamObject, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var obj = _dbConnection.Query<T>($"Proc_Get{tableName}ById", param: entityObj, commandType: CommandType.StoredProcedure).FirstOrDefault();
             return obj;
         }
 
@@ -70,11 +66,41 @@ namespace MISA.CukCuk.Api.Api
                 }
                 dynamicParameters.Add($"@{propertyName}", propertyValue);
             }
-
-            // Lấy dữ liệu từ Database:
+            // Thực thi truy vấn:
             var rowAffects = _dbConnection.Execute($"Proc_Insert{tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-            
-            // Trả lại dữ liệu cho Client:
+            // Trả về số dòng bị ảnh hưởng:
+            return rowAffects;
+        }
+
+        public int Put<T>(T entity)
+        {
+            var tableName = typeof(T).Name;
+            //Lấy param
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            var properties = entity.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                var propertyValue = property.GetValue(entity);
+
+                if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
+                {
+                    propertyValue = property.GetValue(entity, null).ToString();
+                }
+                dynamicParameters.Add($"@{propertyName}", propertyValue);
+            }
+            // Thực thi truy vấn: 
+            var rowAffects = _dbConnection.Execute($"Proc_Update{tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+            // Trả về số dòng bị ảnh hưởng:
+            return rowAffects;
+        }
+
+        public int Delete<T>(object entityObj)
+        {
+            var tableName = typeof(T).Name;
+            // Thực thi truy vấn:
+            var rowAffects = _dbConnection.Execute($"Proc_Delete{tableName}ById", commandType: CommandType.StoredProcedure, param: entityObj);
+            // Trả lại số dòng ảnh hưởng
             return rowAffects;
         }
         #endregion

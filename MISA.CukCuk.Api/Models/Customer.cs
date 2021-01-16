@@ -64,6 +64,11 @@ namespace MISA.CukCuk.Api.Models
         /// Số điện thoại
         /// </summary>
         public string PhoneNumber { get; set; }
+        
+        /// <summary>
+        /// Địa chỉ
+        /// </summary>
+        public string Address{ get; set; }
 
         /// <summary>
         /// Tên công ty
