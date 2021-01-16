@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MISA.CukCuk.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MISA.CukCuk.Api.Controllers
     /// Api Danh mục khách hàng
     /// </summary>
     /// CreatedBy: HVNAM (13/1/2021)
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
@@ -23,7 +24,9 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            DBConnector dBConnector = new DBConnector();
+            var customer = dBConnector.Get<Customer>();
+            return Ok(customer);
         }
     }
 }

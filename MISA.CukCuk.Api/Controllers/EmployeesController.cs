@@ -19,6 +19,17 @@ namespace MISA.CukCuk.Api.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        #region Declare
+        
+        #endregion
+
+        #region Constructor
+        public EmployeesController()
+        {
+        }
+        #endregion
+
+        #region Method
         /// <summary>
         /// Lấy toàn bộ dữ liệu nhân viên
         /// </summary>
@@ -27,25 +38,9 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpGet]
         public IActionResult GetEmployee()
         {
-            try
-            {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-                // Lấy dữ liệu từ Database:
-                var employees = dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
-                // Trả lại dữ liệu cho Client:
-                return Ok(employees);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            DBConnector dBConnector = new DBConnector();
+            var employees = dBConnector.Get<Employee>();
+            return Ok(employees);
         }
 
         /// <summary>
@@ -54,22 +49,13 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="employee">Đối tượng nhân viên</param>
         /// <returns>Trả về nhân viên được thêm mới</returns>
         /// CreatedBy: HVNAM(9/1/201)
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult Post(Employee employee)
         {
             try
             {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
                 //Lấy param
-
-                /*var storeParamObject = new
+                *//*var storeParamObject = new
                 {
                     EmployeeId = employee.EmployeeId.ToString(),
                     EmployeeCode = employee.EmployeeCode,
@@ -91,9 +77,9 @@ namespace MISA.CukCuk.Api.Controllers
                     CreatedBy = employee.CreatedBy,
                     ModifiedDate = employee.ModifiedDate,
                     ModifiedBy = employee.ModifiedBy
-                };*/
+                };*//*
 
-                DynamicParameters dynamicParameters = new DynamicParameters();
+                var dynamicParameters = new DynamicParameters();
                 var properties = employee.GetType().GetProperties();
                 foreach (var property in properties)
                 {
@@ -108,7 +94,7 @@ namespace MISA.CukCuk.Api.Controllers
                 }
 
                 // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_InsertEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                var rowAffects = _dbConnection.Execute("Proc_InsertEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
 
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
@@ -134,16 +120,8 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
                 //Lấy param
-                DynamicParameters dynamicParameters = new DynamicParameters();
+                var dynamicParameters = new DynamicParameters();
                 var properties = employee.GetType().GetProperties();
                 foreach (var property in properties)
                 {
@@ -158,7 +136,7 @@ namespace MISA.CukCuk.Api.Controllers
                 }
 
                 // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                var rowAffects = _dbConnection.Execute("Proc_UpdateEmployee", commandType: CommandType.StoredProcedure, param: dynamicParameters);
 
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
@@ -183,14 +161,6 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                // Kết nối tới Database: 
-                var connectionString = "Host=103.124.92.43;" +
-                    "Port=3306;" +
-                    "Database=MISACukCuk_MF656_HVNAM;" +
-                    "User Id=nvmanh;" +
-                    "Password=12345678";
-                IDbConnection dbConnection = new MySqlConnection(connectionString);
-
                 //Lấy param
                 var storeParamObject = new
                 {
@@ -198,7 +168,7 @@ namespace MISA.CukCuk.Api.Controllers
                 };
 
                 // Lấy dữ liệu từ Database:
-                var rowAffects = dbConnection.Execute("Proc_DeleteEmployeeById", commandType: CommandType.StoredProcedure, param: storeParamObject);
+                var rowAffects = _dbConnection.Execute("Proc_DeleteEmployeeById", commandType: CommandType.StoredProcedure, param: storeParamObject);
                 
                 // Trả lại dữ liệu cho Client:
                 if (rowAffects > 0)
@@ -210,6 +180,11 @@ namespace MISA.CukCuk.Api.Controllers
             {
                 throw;
             }
-        }
+        }*/
+        #endregion
+
+        #region Property
+
+        #endregion
     }
 }
