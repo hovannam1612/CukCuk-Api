@@ -1,7 +1,8 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MISA.CukCuk.Api.Models;
+using MISA.ApplicationCore.Entities;
+using MISA.ApplicationCore.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,20 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Api.Api
 {
-    public class CustomersController : EntityController<Customer>
+    public class CustomersController : BaseEntityController<Customer>
     {
-        public override IActionResult GetById(Guid entityId)
+        #region Declare
+        IBaseService<Customer> _baseService;
+        #endregion
+        #region Constructor
+        public CustomersController(IBaseService<Customer> baseService) : base(baseService)
+        {
+            _baseService = baseService;
+        }
+        #endregion
+
+        #region Method
+        /*public override IActionResult GetById(Guid entityId)
         {
             storeParam = new
             {
@@ -29,6 +41,7 @@ namespace MISA.CukCuk.Api.Api
                 CustomerId = entityId.ToString()
             };
             return base.Delete(entityId);
-        }
+        }*/
+        #endregion
     }
 }

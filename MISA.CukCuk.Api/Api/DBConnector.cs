@@ -52,20 +52,8 @@ namespace MISA.CukCuk.Api.Api
 
         public int Post<T>(T obj){
             var tableName = typeof(T).Name;
-            //Lấy param
-            DynamicParameters dynamicParameters = new DynamicParameters();
-            var properties = obj.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(obj);
-
-                if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
-                {
-                    propertyValue = property.GetValue(obj, null).ToString();
-                }
-                dynamicParameters.Add($"@{propertyName}", propertyValue);
-            }
+            //Lấy param đã được Mapping dự liệu với DB
+            var dynamicParameters = MappingDataType(obj);
             // Thực thi truy vấn:
             var rowAffects = _dbConnection.Execute($"Proc_Insert{tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
             // Trả về số dòng bị ảnh hưởng:
@@ -75,20 +63,8 @@ namespace MISA.CukCuk.Api.Api
         public int Put<T>(T entity)
         {
             var tableName = typeof(T).Name;
-            //Lấy param
-            DynamicParameters dynamicParameters = new DynamicParameters();
-            var properties = entity.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(entity);
-
-                if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
-                {
-                    propertyValue = property.GetValue(entity, null).ToString();
-                }
-                dynamicParameters.Add($"@{propertyName}", propertyValue);
-            }
+            //Lấy param đã được Mapping dự liệu với DB
+            var dynamicParameters = MappingDataType(entity);
             // Thực thi truy vấn: 
             var rowAffects = _dbConnection.Execute($"Proc_Update{tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
             // Trả về số dòng bị ảnh hưởng:
@@ -102,6 +78,24 @@ namespace MISA.CukCuk.Api.Api
             var rowAffects = _dbConnection.Execute($"Proc_Delete{tableName}ById", commandType: CommandType.StoredProcedure, param: entityObj);
             // Trả lại số dòng ảnh hưởng
             return rowAffects;
+        }
+
+        private DynamicParameters MappingDataType<T>(T obj)
+        {
+            var properties = obj.GetType().GetProperties();
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                var propertyValue = property.GetValue(obj);
+
+                if (property.PropertyType == typeof(Guid) || property.PropertyType == typeof(Guid?))
+                {
+                    propertyValue = property.GetValue(obj, null).ToString();
+                }
+                dynamicParameters.Add($"@{propertyName}", propertyValue);
+            }
+            return dynamicParameters;
         }
         #endregion
     }

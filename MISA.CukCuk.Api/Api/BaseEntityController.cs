@@ -1,10 +1,7 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using MISA.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,33 +9,25 @@ namespace MISA.CukCuk.Api.Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EntityController<T> : ControllerBase
+    public class BaseEntityController<T> : ControllerBase
     {
         #region Declare
-        DBConnector _dBConnector;
-
-        //Lấy param có id map với từng đối tượng
-        public object storeParam;
-
+        IBaseService<T> _baseService;
         #endregion
+
         #region Constructor
-        public EntityController()
+        public BaseEntityController(IBaseService<T> baseService)
         {
-            _dBConnector = new DBConnector();
+            _baseService = baseService;
         }
         #endregion
-        #region Method
 
-        /// <summary>
-        /// Lấy toàn bộ dữ liệu
-        /// </summary>
-        /// <returns>Danh sách dữ liệu</returns>
-        /// CreatedBy: HVNam (1/9/2020)
+        #region Method
         [HttpGet]
         public IActionResult Get()
         {
-            var obj = _dBConnector.Get<T>();
-            return Ok(obj);
+            var entities = _baseService.Get();
+            return Ok(entities);
         }
 
 
@@ -50,20 +39,19 @@ namespace MISA.CukCuk.Api.Api
         [HttpGet("{entityId}")]
         public virtual IActionResult GetById(Guid entityId)
         {
-            var obj = _dBConnector.GetById<T>(storeParam);
-            return Ok(obj);
+            return Ok();
         }
 
         /// <summary>
-        /// Thêm mới nhân viên
+        /// Thêm mới bản ghi
         /// </summary>
-        /// <param name="employee">Đối tượng nhân viên</param>
-        /// <returns>Trả về nhân viên được thêm mới</returns>
+        /// <param name="entity">Đối tượng cần thêm</param>
+        /// <returns>Trả về bản ghi được thêm mới</returns>
         /// CreatedBy: HVNAM(9/1/201)
         [HttpPost]
-        public IActionResult Post(T entity)
+        public IActionResult Insert(T entity)
         {
-            var rowEffects = _dBConnector.Post<T>(entity);
+            var rowEffects = _baseService.Insert(entity);
             if (rowEffects > 0)
             {
                 return Created("created", entity);
@@ -75,16 +63,15 @@ namespace MISA.CukCuk.Api.Api
 
         }
         /// <summary>
-        /// Sửa nhân viên
+        /// Sửa bản ghi
         /// </summary>
-        /// <param name="employeeId">id nhân viên cần sửa</param>
-        /// <param name="employee">thông tin nhân viên cần sửa</param>
-        /// <returns>Trả về thông tin nhân viên đã được update</returns>
+        /// <param name="employee">Đối tượng bản ghi cần sửa</param>
+        /// <returns>Trả về thông tin bản ghi đã được update</returns>
         /// CreatedBy: HVNAM(13/1/2021)
         [HttpPut]
         public IActionResult Update(T entity)
         {
-            var rowAffects = _dBConnector.Put<T>(entity);
+            var rowAffects = _baseService.Update(entity);
             // Trả lại dữ liệu cho Client:
             if (rowAffects > 0)
                 return Ok(entity);
@@ -101,13 +88,12 @@ namespace MISA.CukCuk.Api.Api
         [HttpDelete("{entityId}")]
         public virtual IActionResult Delete(Guid entityId)
         {
-            var rowAffects = _dBConnector.Delete<T>(storeParam);
+            var rowAffects = _baseService.Delete(entityId);
             if (rowAffects > 0)
                 return Ok("Delete success");
             else
                 return NoContent();
         }
         #endregion
-
     }
 }
