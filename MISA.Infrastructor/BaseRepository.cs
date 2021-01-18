@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace MISA.Infrastructor
@@ -14,8 +15,8 @@ namespace MISA.Infrastructor
         #region Declare
         IConfiguration _configuration;
         string _connectionString = string.Empty;
-        IDbConnection _dbConnection = null;
-        string _tableName;
+        protected IDbConnection _dbConnection = null;
+        protected string _tableName;
         #endregion
 
         #region Constructor
@@ -32,7 +33,10 @@ namespace MISA.Infrastructor
 
         public int Delete(Guid entityId)
         {
-            throw new NotImplementedException();
+            // Thực thi truy vấn:
+            var rowAffects = _dbConnection.Execute($"Proc_Delete{_tableName}ById", new { EmployeeId = entityId.ToString() }, commandType: CommandType.StoredProcedure);
+            // Trả lại số dòng ảnh hưởng
+            return rowAffects;
         }
 
         public IEnumerable<T> Get()
@@ -43,7 +47,8 @@ namespace MISA.Infrastructor
 
         public T GetById(Guid entityId)
         {
-            throw new NotImplementedException();
+            var obj = _dbConnection.Query<T>($"Proc_Get{_tableName}ById", param: entityId.ToString(), commandType: CommandType.StoredProcedure).FirstOrDefault();
+            return obj;
         }
 
         public int Insert(T entity)
@@ -58,15 +63,14 @@ namespace MISA.Infrastructor
 
         public int Update(T entityId)
         {
-            throw new NotImplementedException();
+            //Lấy param đã được Mapping dự liệu với DB
+            var dynamicParameters = MappingDataType(entityId);
+            // Thực thi truy vấn: 
+            var rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+            // Trả về số dòng bị ảnh hưởng:
+            return rowAffects;
         }
 
-        /// <summary>
-        /// Lấy param và Mapping dự liệu với DB
-        /// </summary>
-        /// <param name="obj">Đố tượng có property cần mapping</param>
-        /// <returns>Các parameter đã được mapping</returns>
-        /// CreatedBy: HVNNAM (17/1/2021)
         private DynamicParameters MappingDataType(T obj)
         {
             var properties = obj.GetType().GetProperties();
@@ -83,6 +87,13 @@ namespace MISA.Infrastructor
                 dynamicParameters.Add($"@{propertyName}", propertyValue);
             }
             return dynamicParameters;
+        }
+
+        public T GetEntityByProperty(string propertyName, object propertyValue)
+        {
+            var query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var enity = _dbConnection.Query<T>(query, commandType:CommandType.Text).FirstOrDefault();
+            return enity;
         }
         #endregion
     }

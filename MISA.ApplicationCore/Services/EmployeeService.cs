@@ -8,37 +8,27 @@ namespace MISA.ApplicationCore.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        #region Declare
-        IEmployeeRepository _employeeRepository;
-        #endregion
-
-        #region Constructor
-        public EmployeeService(IEmployeeRepository employeeRepository)
-        {
-            _employeeRepository = employeeRepository;
-        }
-        #endregion
-        public int DeleteEmployee(Guid employeeId)
+        public ServiceResult Delete(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
-        public Employee GetEmployeeById(Guid employeeId)
+        public IEnumerable<Employee> Get()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Employee> GetEmployees()
-        {
-            return _employeeRepository.GetEmployees();
-        }
-
-        public int InsertEmployee(Employee employee)
+        public Employee GetById(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
-        public int UpdateEmployee(Employee employee)
+        public ServiceResult Insert(Employee entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServiceResult Update(Employee entity)
         {
             throw new NotImplementedException();
         }

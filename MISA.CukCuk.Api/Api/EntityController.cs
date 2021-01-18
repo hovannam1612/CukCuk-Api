@@ -16,10 +16,8 @@ namespace MISA.CukCuk.Api.Api
     {
         #region Declare
         DBConnector _dBConnector;
-
         //Lấy param có id map với từng đối tượng
         public object storeParam;
-
         #endregion
         #region Constructor
         public EntityController()

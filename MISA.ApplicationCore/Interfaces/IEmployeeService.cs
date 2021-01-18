@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Interfaces
 {
-    public interface IEmployeeService
+    public interface IEmployeeService : IBaseService<Employee>
     {
-        /// <summary>
+        /*/// <summary>
         /// Lấy danh sách nhân viên
         /// </summary>
         /// <returns>Danh sách nhân viên</returns>
@@ -44,6 +44,6 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="employeeId">Id nhân viên</param>
         /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        int DeleteEmployee(Guid employeeId);
+        int DeleteEmployee(Guid employeeId);*/
     }
 }

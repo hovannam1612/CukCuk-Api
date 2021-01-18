@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,20 +10,29 @@ namespace MISA.ApplicationCore.Entities
     /// Nhân viên
     /// </summary>
     /// CreatedBy: HVNAM (13/1/2021)
-    public class Customer
+    public class Customer:BaseEntity
     {
         #region Declare
         #endregion
+        #region Constructor
+        public Customer()
+        {
 
+        }
+        #endregion
         #region Property
         /// <summary>
         /// Khóa chính
         /// </summary>
+        [PrimaryKey]
         public Guid CustomerId { get; set; }
 
         /// <summary>
         /// Mã khách hàng
         /// </summary>
+        [Duplicated]
+        [Required]
+        [DisplayName("Mã khách hàng")]
         public string CustomerCode{ get; set; }
 
         /// <summary>
@@ -63,6 +73,8 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [Duplicated]
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
         
         /// <summary>
@@ -79,18 +91,6 @@ namespace MISA.ApplicationCore.Entities
         /// Mã số thuế
         /// </summary>
         public string CompanyTaxCode { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        #endregion
-
-        #region Constructor
-        public Customer()
-        {
-
-        }
         #endregion
 
         #region Method

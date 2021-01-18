@@ -18,15 +18,15 @@ namespace MISA.CukCuk.Api.Api
     /// </summary>
     public class EmployeesController : BaseEntityController<Employee>
     {
-        /*#region Declare
-        IBaseService<Employee> _baseService;
+        #region Declare
+        IEmployeeService _employeeService;
         #endregion
         #region Constructor
-        public EmployeesController(IBaseService<Employee> baseService) : base(baseService)
+        public EmployeesController(IEmployeeService employeeService) : base(employeeService)
         {
-            _baseService = baseService;
+            _employeeService = employeeService;
         }
-        #endregion*/
+        #endregion
 
         #region Method
         /*public override IActionResult GetById(Guid entityId)

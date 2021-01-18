@@ -8,45 +8,14 @@ namespace MISA.ApplicationCore.Interfaces
     /// <summary>
     /// Interface danh mục khác hàng
     /// </summary>
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IBaseRepository<Customer>
     {
         /// <summary>
-        /// Lấy danh sách khách hàng
+        /// Lấy thông tin khách hàng theo mã khách hàng
         /// </summary>
-        /// <returns>Danh sách khách hàng</returns>
+        /// <param name="customerCode">Mã khách hàng</param>
+        /// <returns>Thông tin khách hàng</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        IEnumerable<Customer> GetCustomers();
-
-        /// <summary>
-        /// Lấy khách hàng theo id khách hàng
-        /// </summary>
-        /// <param name="customerId">Id khách hàng</param>
-        /// <returns>Khách hàng đầu tiên tìm thấy</returns>
-        /// CreatedBy: HVNAM (17/1/2021)
-        Customer GetCustomerById(Guid customerId);
-
-        /// <summary>
-        /// Thêm mới khách hàng
-        /// </summary>
-        /// <param name="customer">Đối tượng khách hàng</param>
-        /// <returns>Số lượng bản ghi bị ảnh hưởng (Được thêm mới)</returns>
-        /// CreatedBy: HVNAM (17/1/2021)
-        int InsertCustomer(Customer customer);
-
-        /// <summary>
-        /// Cập nhật khách hàng
-        /// </summary>
-        /// <param name="customer">Đối tượng khách hàng</param>
-        /// <returns>Số lượng bản ghi bị ảnh hưởng (Được cập nhật)</returns>
-        /// CreatedBy: HVNAM (17/1/2021)
-        int UpdateCustomer(Customer customer);
-
-        /// <summary>
-        /// Xóa khách hàng
-        /// </summary>
-        /// <param name="customerId">Id khách hàng</param>
-        /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
-        /// CreatedBy: HVNAM (17/1/2021)
-        int DeleteCustomer(Guid customerId);
+        Customer GetCustomerByCode(string customerCode);
     }
 }

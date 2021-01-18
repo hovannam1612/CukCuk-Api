@@ -46,5 +46,14 @@ namespace MISA.ApplicationCore.Interfaces
         /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
         /// CreatedBy: HVNAM (17/1/2021)
         int Delete(Guid entityId);
+
+        /// <summary>
+        /// Tìm kiếm dữ liệu theo các tiêu chí
+        /// </summary>
+        /// <param name="entity">Đối tượng cần tìm</param>
+        /// <param name="propertyName">Tên tiêu chí</param>
+        /// <returns>Số lượng bản ghi tìm thấy</returns>
+        /// CreatedBy: HNNAM (18/1/2021)
+        T GetEntityByProperty(string propertyName, object propertyValue);
     }
 }

@@ -23,13 +23,17 @@ namespace MISA.CukCuk.Api.Api
         #endregion
 
         #region Method
+        /// <summary>
+        /// Lấy danh sách dữ liệu
+        /// </summary>
+        /// <returns>Danh sách dữ liệu</returns>
+        /// CreatedBy: HVNNAM (17/1/2021)
         [HttpGet]
         public IActionResult Get()
         {
             var entities = _baseService.Get();
             return Ok(entities);
         }
-
 
         /// <summary>
         /// Lấy dữ liệu theo id
@@ -39,7 +43,8 @@ namespace MISA.CukCuk.Api.Api
         [HttpGet("{entityId}")]
         public virtual IActionResult GetById(Guid entityId)
         {
-            return Ok();
+            var obj = _baseService.GetById(entityId);
+            return Ok(obj);
         }
 
         /// <summary>
@@ -51,15 +56,16 @@ namespace MISA.CukCuk.Api.Api
         [HttpPost]
         public IActionResult Insert(T entity)
         {
-            var rowEffects = _baseService.Insert(entity);
-            if (rowEffects > 0)
+            var rowAffects = _baseService.Insert(entity);
+            /*if (rowEffects > 0)
             {
                 return Created("created", entity);
             }
             else
             {
                 return NoContent();
-            }
+            }*/
+            return Ok(rowAffects);
 
         }
         /// <summary>
@@ -73,10 +79,9 @@ namespace MISA.CukCuk.Api.Api
         {
             var rowAffects = _baseService.Update(entity);
             // Trả lại dữ liệu cho Client:
-            if (rowAffects > 0)
-                return Ok(entity);
-            else
-                return NoContent();
+
+            return Ok(entity);
+
         }
 
         /// <summary>
@@ -89,10 +94,9 @@ namespace MISA.CukCuk.Api.Api
         public virtual IActionResult Delete(Guid entityId)
         {
             var rowAffects = _baseService.Delete(entityId);
-            if (rowAffects > 0)
-                return Ok("Delete success");
-            else
-                return NoContent();
+
+            return Ok("Delete success");
+
         }
         #endregion
     }
