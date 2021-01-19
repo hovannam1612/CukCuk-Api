@@ -10,7 +10,7 @@ namespace MISA.ApplicationCore.Entities
     /// Nhân viên
     /// </summary>
     /// CreatedBy: HNNAM (9/1/2021)
-    public class Employee
+    public class Employee : BaseEntity
     {
         #region Declare
         #endregion
@@ -29,11 +29,16 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Mã nhân viên
         /// </summary>
+        [Required]
+        [Duplicated]
+        [@DisplayName("Mã nhân viên")]
         public string EmployeeCode { get; set; }
 
         /// <summary>
         /// Họ và tên
         /// </summary>
+        [Required]
+        [@DisplayName("Họ và tên")]
         public string FullName { get; set; }
 
         /// <summary>
@@ -64,11 +69,17 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Email
         /// </summary>
+        [Required]
+        [Duplicated]
+        [@DisplayName("Email")]
         public string Email { get; set; }
 
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [Required]
+        [Duplicated]
+        [@DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
@@ -100,12 +111,6 @@ namespace MISA.ApplicationCore.Entities
         /// Nhóm chức vụ công việc
         /// </summary>
         public Guid? PositionId { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
-
         #endregion
         
         #region Method

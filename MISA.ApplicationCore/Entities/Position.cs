@@ -9,9 +9,15 @@ namespace MISA.ApplicationCore.Entities
     /// Chức vụ
     /// </summary>
     /// CreatedBy: HVNAM (9/1/2021)
-    public class Position
+    public class Position : BaseEntity
     {
         #region Declare
+        #endregion
+        #region Contructor
+        public Position()
+        {
+
+        }
         #endregion
 
         #region Property
@@ -34,20 +40,7 @@ namespace MISA.ApplicationCore.Entities
         /// Mô tả
         /// </summary>
         public string Description { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
         #endregion
-
-        #region Contructor
-        public Position()
-        {
-
-        }
-        #endregion
-
         #region Method
         #endregion
 

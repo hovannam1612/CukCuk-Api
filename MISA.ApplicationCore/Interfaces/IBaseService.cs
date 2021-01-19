@@ -1,6 +1,7 @@
 ﻿using MISA.ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace MISA.ApplicationCore.Interfaces
@@ -23,7 +24,7 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="entityId">id bản ghi cần lấy</param>
         /// <returns>Bản ghi đầu tiên tìm thấy</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        T GetById(Guid entityId);
+        T GetById(Guid entity, PropertyInfo propertyInfo);
 
         /// <summary>
         /// Thêm mới bản ghi
@@ -46,6 +47,6 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="entityId">id bản ghi cần xóa</param>
         /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        ServiceResult Delete(Guid entityId);
+        ServiceResult Delete(Guid entityId, PropertyInfo propertyInfo);
     }
 }

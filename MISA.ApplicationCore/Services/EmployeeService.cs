@@ -2,35 +2,23 @@
 using MISA.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace MISA.ApplicationCore.Services
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeService : BaseService<Employee>, IEmployeeService
     {
-        public ServiceResult Delete(Guid entityId)
-        {
-            throw new NotImplementedException();
-        }
+        #region Declare
+        IEmployeeRepository _employeeRepository;
+        #endregion
 
-        public IEnumerable<Employee> Get()
+        #region Constructor
+        public EmployeeService(IEmployeeRepository employeeRepository) : base(employeeRepository)
         {
-            throw new NotImplementedException();
+            _employeeRepository = employeeRepository;
         }
+        #endregion
 
-        public Employee GetById(Guid entityId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ServiceResult Insert(Employee entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ServiceResult Update(Employee entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

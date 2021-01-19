@@ -6,48 +6,20 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Text;
 
 namespace MISA.Infrastructor
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
         #region Declare
-        IConfiguration _configuration;
         #endregion
 
         #region Constructor
-        public EmployeeRepository(IConfiguration configuration)
+        public EmployeeRepository(IConfiguration configuration) : base(configuration)
         {
-            _configuration = configuration;
         }
         #endregion
-        public int DeleteEmployee(Guid employeeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Employee GetEmployeeById(Guid employeeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Employee> GetEmployees()
-        {
-            var connectionString = _configuration.GetConnectionString("MISACukCukConnectionString");
-            var dbConnection = new MySqlConnection(connectionString);
-            var employees = dbConnection.Query<Employee>($"Proc_GetEmployees", commandType: CommandType.StoredProcedure);
-            return employees;
-        }
-
-        public int InsertEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

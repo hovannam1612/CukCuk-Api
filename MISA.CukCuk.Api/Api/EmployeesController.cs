@@ -29,23 +29,7 @@ namespace MISA.CukCuk.Api.Api
         #endregion
 
         #region Method
-        /*public override IActionResult GetById(Guid entityId)
-        {
-            storeParam = new
-            {
-                EmployeeId = entityId.ToString()
-            };
-            return base.GetById(entityId);
-        }
-
-        public override IActionResult Delete(Guid entityId)
-        {
-            storeParam = new
-            {
-                EmployeeId = entityId.ToString()
-            };
-            return base.Delete(entityId);
-        }*/
+       
         #endregion
 
     }

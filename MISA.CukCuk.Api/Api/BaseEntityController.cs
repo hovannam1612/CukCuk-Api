@@ -41,9 +41,11 @@ namespace MISA.CukCuk.Api.Api
         /// <returns></returns>
         /// CreatedBy: HVNAM (1/9/2021)
         [HttpGet("{entityId}")]
-        public virtual IActionResult GetById(Guid entityId)
+        public virtual IActionResult GetById([FromRoute] Guid entityId, T entity)
         {
-            var obj = _baseService.GetById(entityId);
+            var entityIdAttr = $"{typeof(T).Name}Id";
+            var property = entity.GetType().GetProperty(entityIdAttr);
+            var obj = _baseService.GetById(entityId, property);
             return Ok(obj);
         }
 
@@ -57,16 +59,7 @@ namespace MISA.CukCuk.Api.Api
         public IActionResult Insert(T entity)
         {
             var rowAffects = _baseService.Insert(entity);
-            /*if (rowEffects > 0)
-            {
-                return Created("created", entity);
-            }
-            else
-            {
-                return NoContent();
-            }*/
             return Ok(rowAffects);
-
         }
         /// <summary>
         /// Sửa bản ghi
@@ -74,14 +67,14 @@ namespace MISA.CukCuk.Api.Api
         /// <param name="employee">Đối tượng bản ghi cần sửa</param>
         /// <returns>Trả về thông tin bản ghi đã được update</returns>
         /// CreatedBy: HVNAM(13/1/2021)
-        [HttpPut]
-        public IActionResult Update(T entity)
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] Guid id,[FromBody] T entity)
         {
+            var entityId = $"{typeof(T).Name}Id";
+            entity.GetType().GetProperty(entityId).SetValue(entity, id);
             var rowAffects = _baseService.Update(entity);
             // Trả lại dữ liệu cho Client:
-
-            return Ok(entity);
-
+            return Ok(rowAffects);
         }
 
         /// <summary>
@@ -91,12 +84,12 @@ namespace MISA.CukCuk.Api.Api
         /// <returns>Trả về thông báo "Delete success" khi xóa thành công</returns>
         /// CreatedBy: HVNam (13/1/2021)
         [HttpDelete("{entityId}")]
-        public virtual IActionResult Delete(Guid entityId)
+        public IActionResult Delete(Guid entityId, T entity)
         {
-            var rowAffects = _baseService.Delete(entityId);
-
-            return Ok("Delete success");
-
+            var entityIdAttr = $"{typeof(T).Name}Id";
+            var property = entity.GetType().GetProperty(entityIdAttr);
+            var rowAffects = _baseService.Delete(entityId, property);
+            return Ok(rowAffects);
         }
         #endregion
     }

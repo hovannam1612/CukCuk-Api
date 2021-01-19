@@ -1,16 +1,19 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using MISA.ApplicationCore.Entities;
+using MISA.ApplicationCore.Enums;
 using MISA.ApplicationCore.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace MISA.Infrastructor
 {
-    public class BaseRepository<T> : IBaseRepository<T>
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         #region Declare
         IConfiguration _configuration;
@@ -31,11 +34,12 @@ namespace MISA.Infrastructor
 
         #region Method
 
-        public int Delete(Guid entityId)
+        public int Delete(Guid entityId, PropertyInfo propertyInfo)
         {
-            // Thực thi truy vấn:
-            var rowAffects = _dbConnection.Execute($"Proc_Delete{_tableName}ById", new { EmployeeId = entityId.ToString() }, commandType: CommandType.StoredProcedure);
-            // Trả lại số dòng ảnh hưởng
+            var propertyName = propertyInfo.Name;
+            var propertyValue = entityId.ToString();
+            var query = $"DELETE FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var rowAffects = _dbConnection.Execute(query, commandType: CommandType.Text);
             return rowAffects;
         }
 
@@ -45,9 +49,12 @@ namespace MISA.Infrastructor
             return entities;
         }
 
-        public T GetById(Guid entityId)
+        public T GetById(Guid entityId, PropertyInfo propertyInfo)
         {
-            var obj = _dbConnection.Query<T>($"Proc_Get{_tableName}ById", param: entityId.ToString(), commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var propertyName = propertyInfo.Name;
+            var propertyValue = entityId.ToString();
+            var query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var obj = _dbConnection.Query<T>(query, commandType: CommandType.Text).FirstOrDefault();
             return obj;
         }
 
@@ -89,11 +96,20 @@ namespace MISA.Infrastructor
             return dynamicParameters;
         }
 
-        public T GetEntityByProperty(string propertyName, object propertyValue)
+        public T GetEntityByProperty(T entity, PropertyInfo propertyInfo)
         {
-            var query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
-            var enity = _dbConnection.Query<T>(query, commandType:CommandType.Text).FirstOrDefault();
-            return enity;
+            var propertyName = propertyInfo.Name;
+            var propertyValue = propertyInfo.GetValue(entity);
+            var keyValue = entity.GetType().GetProperty($"{_tableName}Id").GetValue(entity);
+            var query = string.Empty;
+            if (entity.EntityState == EntityState.Insert)
+                query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            else if (entity.EntityState == EntityState.Update)
+                query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}' AND {_tableName}Id <> '{keyValue}'";
+            else
+                query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var enityReturn = _dbConnection.Query<T>(query, commandType: CommandType.Text).FirstOrDefault();
+            return enityReturn;
         }
         #endregion
     }

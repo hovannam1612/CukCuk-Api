@@ -9,11 +9,19 @@ namespace MISA.ApplicationCore.Entities
     /// Phòng Ban
     /// </summary>
     /// CreatedBy: HVNAM (9/1/2021)
-    public class Department
+    public class Department : BaseEntity
     {
         #region Declare
 
         #endregion
+
+        #region Contructor
+        public Department()
+        {
+
+        }
+        #endregion
+
         #region Property
         /// <summary>
         /// Khóa chính
@@ -34,18 +42,8 @@ namespace MISA.ApplicationCore.Entities
         /// Mô tả
         /// </summary>
         public string Description { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
         #endregion
-        #region Contructor
-        public Department()
-        {
-
-        }
-        #endregion
+        
         #region Method
         #endregion
     }
