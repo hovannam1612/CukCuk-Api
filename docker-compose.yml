@@ -13,6 +13,6 @@ services:
             - '8001:80'
         build:
             context: .
-            dockerfile: MISA.CukCuk.Web/Dockerfile
+            dockerfile: MISA.CukCuk.Api/Dockerfile
 
   
