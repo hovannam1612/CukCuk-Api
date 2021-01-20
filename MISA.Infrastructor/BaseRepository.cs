@@ -13,7 +13,7 @@ using System.Text;
 
 namespace MISA.Infrastructor
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T>, IDisposable where T : BaseEntity
     {
         #region Declare
         IConfiguration _configuration;
@@ -33,13 +33,16 @@ namespace MISA.Infrastructor
         #endregion
 
         #region Method
-
-        public int Delete(Guid entityId, PropertyInfo propertyInfo)
+        public int Delete(Guid entityId)
         {
-            var propertyName = propertyInfo.Name;
-            var propertyValue = entityId.ToString();
-            var query = $"DELETE FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
-            var rowAffects = _dbConnection.Execute(query, commandType: CommandType.Text);
+            int rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                var query = $"DELETE FROM {_tableName} WHERE {_tableName}Id = '{entityId.ToString()}'";
+                rowAffects = _dbConnection.Execute(query, commandType: CommandType.Text);
+                transaction.Commit();
+            }
             return rowAffects;
         }
 
@@ -49,35 +52,44 @@ namespace MISA.Infrastructor
             return entities;
         }
 
-        public T GetById(Guid entityId, PropertyInfo propertyInfo)
+        public T GetById(Guid entityId)
         {
-            var propertyName = propertyInfo.Name;
-            var propertyValue = entityId.ToString();
-            var query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var query = $"SELECT * FROM {_tableName} WHERE {_tableName}Id = '{entityId.ToString()}'";
             var obj = _dbConnection.Query<T>(query, commandType: CommandType.Text).FirstOrDefault();
             return obj;
         }
 
         public int Insert(T entity)
         {
-            //Lấy param đã được Mapping dự liệu với DB
-            var dynamicParameters = MappingDataType(entity);
-            // Thực thi truy vấn: 
-            var rowAffects = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-            // Trả về số dòng bị ảnh hưởng:
+            var rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                var dynamicParameters = MappingDataType(entity);
+                rowAffects = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                transaction.Commit();
+            }
             return rowAffects;
         }
 
         public int Update(T entityId)
         {
-            //Lấy param đã được Mapping dự liệu với DB
-            var dynamicParameters = MappingDataType(entityId);
-            // Thực thi truy vấn: 
-            var rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-            // Trả về số dòng bị ảnh hưởng:
+            var rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                var dynamicParameters = MappingDataType(entityId);
+                rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+            }
             return rowAffects;
         }
 
+        /// <summary>
+        /// Mapping dự liệu với DB
+        /// </summary>
+        /// <param name="obj">Đối tượng cần mapping dữ liệu</param>
+        /// <returns>Parammerts đã mapping</returns>
+        /// CreatedBy: HVNAM (20/1/2021)
         private DynamicParameters MappingDataType(T obj)
         {
             var properties = obj.GetType().GetProperties();
@@ -110,6 +122,15 @@ namespace MISA.Infrastructor
                 query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
             var enityReturn = _dbConnection.Query<T>(query, commandType: CommandType.Text).FirstOrDefault();
             return enityReturn;
+        }
+
+        /// <summary>
+        /// Tụ động Đóng kết nối 
+        /// </summary>
+        public void Dispose()
+        {
+            if (_dbConnection.State == ConnectionState.Open)
+                _dbConnection.Close();
         }
         #endregion
     }

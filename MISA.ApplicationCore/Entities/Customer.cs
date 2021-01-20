@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +24,7 @@ namespace MISA.ApplicationCore.Entities
         /// Khóa chính
         /// </summary>
         [PrimaryKey]
-        [@DisplayName("Id khách hàng")]
+        [DisplayName("Id khách hàng")]
         public Guid CustomerId { get; set; }
 
         /// <summary>
@@ -33,14 +32,15 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Duplicated]
         [Required]
-        [@DisplayName("Mã khách hàng")]
+        [DisplayName("Mã khách hàng")]
+        [MaxLength(20, "Mã khách hàng không vượt quá 20 ký tự")]
         public string CustomerCode{ get; set; }
 
         /// <summary>
         /// Họ và tên khách hàng
         /// </summary>
         [Required]
-        [@DisplayName("Họ và tên")]
+        [DisplayName("Họ và tên")]
         public string FullName { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
-        [@DisplayName("Email")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
-        [@DisplayName("Số điện thoại")]
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
         
         /// <summary>

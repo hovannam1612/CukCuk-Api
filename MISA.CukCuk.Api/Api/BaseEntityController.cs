@@ -41,12 +41,12 @@ namespace MISA.CukCuk.Api.Api
         /// <returns></returns>
         /// CreatedBy: HVNAM (1/9/2021)
         [HttpGet("{entityId}")]
-        public virtual IActionResult GetById([FromRoute] Guid entityId, T entity)
+        public virtual IActionResult GetById([FromRoute] Guid entityId)
         {
-            var entityIdAttr = $"{typeof(T).Name}Id";
-            var property = entity.GetType().GetProperty(entityIdAttr);
-            var obj = _baseService.GetById(entityId, property);
-            return Ok(obj);
+           /* var entityIdAttr = $"{typeof(T).Name}Id";
+            var property = entity.GetType().GetProperty(entityIdAttr);*/
+            var obj = _baseService.GetById(entityId);
+            return Ok(obj); 
         }
 
         /// <summary>
@@ -58,8 +58,10 @@ namespace MISA.CukCuk.Api.Api
         [HttpPost]
         public IActionResult Insert(T entity)
         {
-            var rowAffects = _baseService.Insert(entity);
-            return Ok(rowAffects);
+            var serviceResult = _baseService.Insert(entity);
+            if (serviceResult.MISACode == ApplicationCore.Enums.MISACode.NotValid)
+                return BadRequest(serviceResult);
+            return Ok(serviceResult);
         }
         /// <summary>
         /// Sửa bản ghi
@@ -72,9 +74,11 @@ namespace MISA.CukCuk.Api.Api
         {
             var entityId = $"{typeof(T).Name}Id";
             entity.GetType().GetProperty(entityId).SetValue(entity, id);
-            var rowAffects = _baseService.Update(entity);
+            var serviceResult = _baseService.Update(entity);
             // Trả lại dữ liệu cho Client:
-            return Ok(rowAffects);
+            if (serviceResult.MISACode == ApplicationCore.Enums.MISACode.NotValid)
+                return BadRequest(serviceResult);
+            return Ok(serviceResult);
         }
 
         /// <summary>
@@ -84,12 +88,12 @@ namespace MISA.CukCuk.Api.Api
         /// <returns>Trả về thông báo "Delete success" khi xóa thành công</returns>
         /// CreatedBy: HVNam (13/1/2021)
         [HttpDelete("{entityId}")]
-        public IActionResult Delete(Guid entityId, T entity)
+        public IActionResult Delete([FromRoute]Guid entityId)
         {
-            var entityIdAttr = $"{typeof(T).Name}Id";
-            var property = entity.GetType().GetProperty(entityIdAttr);
-            var rowAffects = _baseService.Delete(entityId, property);
-            return Ok(rowAffects);
+            var serviceResult = _baseService.Delete(entityId);
+            if (serviceResult.MISACode == ApplicationCore.Enums.MISACode.NotValid)
+                return BadRequest(serviceResult);
+            return Ok(serviceResult);
         }
         #endregion
     }

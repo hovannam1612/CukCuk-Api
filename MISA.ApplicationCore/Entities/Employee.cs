@@ -31,14 +31,15 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
-        [@DisplayName("Mã nhân viên")]
+        [DisplayName("Mã nhân viên")]
+        [MaxLength(20,"Mã nhân viên không được quá 20 ký tự")]
         public string EmployeeCode { get; set; }
 
         /// <summary>
         /// Họ và tên
         /// </summary>
         [Required]
-        [@DisplayName("Họ và tên")]
+        [DisplayName("Họ và tên")]
         public string FullName { get; set; }
 
         /// <summary>
@@ -67,11 +68,11 @@ namespace MISA.ApplicationCore.Entities
         public string IdentityPlace { get; set; }
 
         /// <summary>
-        /// Email
+        /// Địa chỉ Email
         /// </summary>
         [Required]
         [Duplicated]
-        [@DisplayName("Email")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
-        [@DisplayName("Số điện thoại")]
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
 
         /// <summary>

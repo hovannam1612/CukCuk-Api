@@ -23,7 +23,7 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="entityId">id bản ghi cần lấy</param>
         /// <returns>Bản ghi đầu tiên tìm thấy</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        T GetById(Guid entityId, PropertyInfo propertyInfo);
+        T GetById(Guid entityId);
 
         /// <summary>
         /// Thêm mới bản ghi
@@ -41,12 +41,14 @@ namespace MISA.ApplicationCore.Interfaces
         /// CreatedBy: HVNAM (17/1/2021)
         int Update(T entityId);
 
+        
         /// <summary>
-        /// Xóa bản ghi theo id
-        /// <param name="entityId">id bản ghi cần xóa</param>
-        /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
+        /// Xóa bản ghi theo Id
+        /// </summary>
+        /// <param name="entityId">Id bản ghi</param>
+        /// <returns>Số lượng bản ghi bị xóa</returns>
         /// CreatedBy: HVNAM (17/1/2021)
-        int Delete(Guid entityId, PropertyInfo propertyInfo);
+        int Delete(Guid entityId);
 
         /// <summary>
         /// Tìm kiếm dữ liệu theo các tiêu chí
