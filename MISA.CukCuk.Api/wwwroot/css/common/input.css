@@ -1,0 +1,21 @@
+input, select {
+    border: 1px solid #bbbbbb;
+    height: 38px;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+}
+
+    input::placeholder {
+        font-size: 12px;
+        color: #bbbbbb;
+        font-family: GoogleSans-Regular;
+    }
+
+    input:focus {
+        border: 1px solid #019160;
+    }
+
+        input:focus::placeholder {
+            color: transparent;
+        }

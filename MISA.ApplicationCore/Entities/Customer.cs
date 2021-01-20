@@ -73,7 +73,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
-        [DisplayName("Email")]
+        [DisplayName("Địa chỉ email")]
         public string Email { get; set; }
 
         /// <summary>

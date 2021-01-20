@@ -1,0 +1,101 @@
+﻿.m-btn {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 13px;
+    color: #ffffff;
+    font-family: GoogleSans-Regular;
+    background-color: #019160;
+    padding: 0 16px;
+    text-align: left;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+    .m-btn:hover {
+        background: #2FBE8E;
+    }
+    .m-btn .m-btn-icon {
+        background-position: center;
+    }
+.m-btn .btn-text{
+    margin-left: 8px;
+}
+
+.m-btn-second{
+    border: 1px solid #bbbbbb;
+    background-color: #ffffff;
+    border-radius: 4px;
+    height: 40px;
+    color: #000000;
+    padding: 0 24px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+    .m-btn-second:hover{
+        background-color: #e9ebee;
+    }
+    .m-btn-refresh {
+        background-image: url('/content/common/icon/refresh.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+
+/*paging toolbar*/
+.btn-pagenumber {
+    width: 30px;
+    height: 30px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: #e9ebee;
+    cursor: pointer !important;
+}
+
+    .btn-pagenumber:hover {
+        background-color: #ffffff;
+    }
+
+    .btn-pagenumber.btn-pagenumber-selected, .btn-pagenumber-selected:hover {
+        background-color: #019160;
+        color: #ffffff;
+    }
+
+.btn-select-page {
+    opacity: .7;
+    margin: 0 4px;
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.00);
+}
+
+    .btn-select-page:hover {
+        opacity: 1;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+    }
+
+.m-btn-firstpage {
+    background-image: url('/content/common/icon/btn-firstpage.svg');
+}
+
+.m-btn-prev-page {
+    background-image: url('/content/common/icon/btn-prev-page.svg');
+}
+
+.m-btn-next-page {
+    background-image: url('/content/common/icon/btn-next-page.svg');
+}
+
+.m-btn-lastpage {
+    background-image: url('/content/common/icon/btn-lastpage.svg');
+}

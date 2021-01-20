@@ -1,0 +1,21 @@
+﻿.icon-option-default-20 {
+    width: 20px;
+    height: 20px;
+    background-image: url('/content/common/icon/option.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.icon-add {
+    width: 16px;
+    height: 16px;
+    background-image: url('/content/common/icon/add.png');
+    background-repeat: no-repeat;
+}
+
+.icon-search {
+    background-image: url('../../content/common/icon/search.png');
+    background-repeat: no-repeat;
+    padding-left:40px;
+    background-position: 16px center;
+}

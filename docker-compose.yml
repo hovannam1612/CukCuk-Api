@@ -1,0 +1,18 @@
+version: "3"  # optional since v1.27.0
+networks:
+  hvnam-network:
+    external: true
+services:
+    hvnam-cukcuk:
+        image: hvnam
+        container_name: hvnam
+        restart: always
+        networks:
+            - hvnam-network
+        ports:
+            - '8001:80'
+        build:
+            context: .
+            dockerfile: MISA.CukCuk.Web/Dockerfile
+
+  

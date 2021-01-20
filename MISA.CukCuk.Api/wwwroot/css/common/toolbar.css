@@ -1,0 +1,46 @@
+﻿
+.filter-bar {
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+    .filter-bar .filter-left {
+    }
+
+    .filter-bar .filter-right {
+        position: absolute;
+        right: 16px;
+        align-self: center
+    }
+
+.paging-bar {
+    border-top: 2px solid #bbbbbb;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+}
+
+    .paging-bar .paging-record-info {
+        position: absolute;
+        left: 16px;
+    }
+
+    .paging-bar .paging-record-option {
+        position: absolute;
+        right: 16px;
+    }
+
+    .paging-bar .paging-option button {
+        outline: none;
+        cursor: pointer;
+    }
+
+    .paging-bar .paging-option {
+        display: flex;
+    }

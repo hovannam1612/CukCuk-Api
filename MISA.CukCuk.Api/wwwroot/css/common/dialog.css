@@ -1,0 +1,201 @@
+/*dialog*/
+.m-dialog {
+    display: none;
+}
+
+span {
+    color: #ff0000;
+}
+
+.m-dialog input {
+    padding: 0 0 0 16px;
+}
+
+.m-dialog select {
+    height: 40px;
+}
+
+.m-dialog .m-label {
+    margin-bottom: 4px;
+}
+
+.m-dialog .dialog-modal {
+    opacity: .4;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    z-index: 999;
+}
+
+.m-dialog .dialog-content {
+    resize: both;
+    width: 640px;
+    height: 588px;
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -294px;
+    margin-left: -320px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.m-dialog .dialog-content-padding {
+    padding: 24px 24px 0 24px;
+}
+
+.m-dialog .dialog-header {
+    display: flex;
+}
+
+.dialog-header .dialog-header-title {
+    font-size: 15px;
+}
+
+.dialog-header .dialog-header-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+    .dialog-header .dialog-header-close button {
+        width: 30px;
+        height: 30px;
+        border-radius: 0 5px 0 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-image: url('/content/common/icon/x.svg');
+        background-color: #ffffff;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: .7;
+    }
+
+        .dialog-header .dialog-header-close button:hover {
+            background-color: #ccc;
+        }
+
+.dialog-body {
+    padding: 24px 0 0 0;
+}
+
+.dialog-img {
+    width: 200px;
+    text-align: center;
+    float: left;
+}
+
+    .dialog-img .text {
+        margin-top: 16px;
+    }
+
+.dialog-body .dialog-img .img {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid #808080;
+    background-image: url('/content/common/img/default-avatar.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.m-row {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.dialog-input-right .m-col {
+    padding-left: 16px;
+    padding-bottom: 0px;
+}
+
+.dialog-input-right .m-control input[type=text] {
+    width: 162px;
+}
+
+.dialog-input-right .m-control input[type=date] {
+    padding-right: 16px;
+    width: 146px;
+}
+
+.dialog-input-right .m-control select {
+    width: 178px;
+}
+
+.dialog-input-right .m-control label {
+    font-size: 13px;
+    line-height: 13px;
+    padding-left: 5px;
+}
+
+.dialog-input-bottom .m-col {
+    padding-right: 16px;
+}
+
+    .dialog-input-bottom .m-col:first-child input {
+        width: 377px;
+    }
+
+    .dialog-input-bottom .m-col:last-child input {
+        width: 162px;
+    }
+
+.dialog-input-bottom .m-row:last-child input {
+    width: 573px;
+}
+
+.dialog-footer {
+    height: 60px;
+    background-color: #ccc;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    clear: both;
+}
+
+.dialog-footer-button {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 24px;
+}
+
+    .dialog-footer-button button {
+        width: 80px;
+    }
+
+        .dialog-footer-button button:last-child {
+            margin-left: 16px;
+        }
+
+.btnSave {
+    display: flex;
+    color: #FFFFFF;
+}
+
+.btn-save .icon-save {
+    height: 20px;
+    width: 20px;
+    padding-right: 4px;
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+}
+
+    .btn-cancel:hover {
+        background-color: #9a9999;
+    }
+
+.text-cancel {
+    margin: 0 auto;
+    color: #000000;
+}

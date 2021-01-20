@@ -39,9 +39,17 @@ namespace MISA.Infrastructor
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                var query = $"DELETE FROM {_tableName} WHERE {_tableName}Id = '{entityId.ToString()}'";
-                rowAffects = _dbConnection.Execute(query, commandType: CommandType.Text);
-                transaction.Commit();
+                try
+                {
+                    var query = $"DELETE FROM {_tableName} WHERE {_tableName}Id = '{entityId.ToString()}'";
+                    rowAffects = _dbConnection.Execute(query, commandType: CommandType.Text);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+
             }
             return rowAffects;
         }
@@ -65,9 +73,17 @@ namespace MISA.Infrastructor
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                var dynamicParameters = MappingDataType(entity);
-                rowAffects = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
-                transaction.Commit();
+                try
+                {
+                    var dynamicParameters = MappingDataType(entity);
+                    rowAffects = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+
             }
             return rowAffects;
         }
@@ -78,8 +94,16 @@ namespace MISA.Infrastructor
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                var dynamicParameters = MappingDataType(entityId);
-                rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                try
+                {
+                    var dynamicParameters = MappingDataType(entityId);
+                    rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+
             }
             return rowAffects;
         }

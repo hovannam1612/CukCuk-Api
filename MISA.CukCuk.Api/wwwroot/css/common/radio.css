@@ -1,0 +1,37 @@
+.m-radio-group {
+    display: flex;
+    height: 40px;
+}
+
+    .m-radio-group .m-radio-item {
+        display: flex;
+        align-items: center;
+        padding-right: 16px;
+    }
+
+input[type=radio]:after {
+    width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    position: relative;
+    background-size: contain;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+}
+
+input[type=radio]:checked:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    position: relative;
+    background-image: url('/content/common/icon/radio@2x.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    top: 7px;
+    left: -4px;
+}

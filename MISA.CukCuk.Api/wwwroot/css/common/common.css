@@ -1,0 +1,9 @@
+﻿.text-align-right{
+    text-align: right;
+}
+.text-align-center{
+    text-align: center;
+}
+.border-red {
+    border: 1px solid #ff0000;
+}
