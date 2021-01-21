@@ -99,13 +99,14 @@
                     <tr>
                         <th fieldName="EmployeeCode">Mã nhân viên</th>
                         <th fieldName="FullName">Họ tên</th>
-                        <th fieldName="GenderName">Giới tính</th>
+                        <th fieldName="Gender" formatType="Gender">Giới tính</th>
                         <th fieldName="DateOfBirth" formatType="ddmmyyyy" class="text-align-center">Ngày sinh</th>
-                        <th fieldName="PhoneNumber">Số điện thoại</th>
-                        <th fieldName="Salary" formatType="Money" class="text-align-right">Mức lương hiện tại</th>
-                        <th fieldName="Address">Địa chỉ</th>
-                        <th fieldName="PositionName">Vị trí</th>
-                        <th fieldName="WorkStatusName">Trạng thái làm việc</th>
+                        <th fieldName="PhoneNumber">Điện thoại</th>
+                        <th fieldName="Email">Email</th>
+                        <th fieldName="PositionName">Chức vụ</th>
+                        <th fieldName="DepartmentName">Phòng ban</th>
+                        <th fieldName="Salary" formatType="Money" class="text-align-right">Mức lương cơ bản</th>
+                        <th fieldName="WorkStatus" formatType="WorkStatus">Tình trạng công việc</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -247,6 +248,8 @@
                                     <div class="m-label">Tình trạnh công việc</div>
                                     <div class="m-control">
                                         <select id="cbWorkStatus" fieldName="WorkStatus">
+                                            <option value="0">Đã nghỉ việc</option>
+                                            <option value="1">Đang làm việc</option>
                                         </select>
                                     </div>
                                 </div>

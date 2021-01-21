@@ -16,7 +16,8 @@ namespace MISA.ApplicationCore.Entities
         #endregion
 
         #region Contructor
-        public Employee() { 
+        public Employee()
+        {
         }
         #endregion
 
@@ -32,7 +33,7 @@ namespace MISA.ApplicationCore.Entities
         [Required]
         [Duplicated]
         [DisplayName("Mã nhân viên")]
-        [MaxLength(20,"Mã nhân viên không được quá 20 ký tự")]
+        [MaxLength(20, "Mã nhân viên không được quá 20 ký tự")]
         public string EmployeeCode { get; set; }
 
         /// <summary>
@@ -109,11 +110,21 @@ namespace MISA.ApplicationCore.Entities
         public Guid? DepartmentId { get; set; }
 
         /// <summary>
+        /// Phòng ban
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// Vị trí
+        /// </summary>
+        public string PositionName { get; set; }
+
+        /// <summary>
         /// Nhóm chức vụ công việc
         /// </summary>
         public Guid? PositionId { get; set; }
         #endregion
-        
+
         #region Method
         #endregion
     }

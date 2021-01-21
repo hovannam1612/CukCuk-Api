@@ -19,7 +19,7 @@ class CustomerJS extends BaseJS {
         var select = $('select#cbCustomerGroupName').empty();
         // Lấy dữ liệu nhóm khách hàng
         $.ajax({
-            url: this.host + "/api/customergroups",
+            url: this.host + "/api/v1/customergroups",
             method: 'GET',
         }).done(function (res) {
             if (res) {

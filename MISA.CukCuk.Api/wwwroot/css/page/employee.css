@@ -13,7 +13,10 @@
     height: 640px;
     width: 186px;
 }
-
+.m-dialog input[type=date]{
+    padding-right: 10px;
+    width: 189px;
+}
 .m-dialog input{
     width: 199px;
 }
@@ -28,9 +31,7 @@
     font-weight: bold;
     margin-left: 202px;
 }
-.e-dialog-input-right{
-    
-}
+
 .under-line {
     width: 80px;
     height: 3px;

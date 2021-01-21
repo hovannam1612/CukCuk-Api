@@ -1,4 +1,4 @@
-﻿
+
 class BaseJS {
     constructor() {
         this.host = "";
@@ -22,7 +22,6 @@ class BaseJS {
      * */
     initEvent() {
         var me = this;
-
         /**-------------------------------------
          * Sự kiện khi nhấn button thêm mới
          * CreatedBy: HVNAM (31/12/2020)
@@ -34,9 +33,13 @@ class BaseJS {
                 $('input[type="text"], input[type="email"]').val(null);
                 $('.checked').prop('checked', true);
                 $('.m-dialog input')[0].focus();
+
                 // Load dữ liệu cho combobox
-                if (me.getApiRouter == "/api/customers") {
-                    me.loadComboBoxCustomerGroup();
+                if (me.getApiRouter == "/api/v1/customers") {
+                }
+                if (me.getApiRouter == "/api/v1/employees") {
+                    loadComboBoxPositionName();
+                    loadComboBoxDepartmentName();
                 }
             } catch (e) {
                 console.log(e);
@@ -92,8 +95,6 @@ class BaseJS {
                     else
                         entity[propertyName] = value;
                 })
-                console.log(entity);
-                debugger;
                 // Gọi service tương ứng thực hiện lưu dữ liệu
                 $.ajax({
                     url: me.host + me.getApiRouter,
@@ -127,8 +128,8 @@ class BaseJS {
         $('table tbody').on('dblclick', 'tr', function () {
             //Nếu đang thao tác với trang nào thì thực hiện load combobox tương ứng của trang đó
             if (me.getApiRouter == "/api/customers") {
-                me.loadComboBoxCustomerGroup();
-            }   
+                loadComboBoxCustomerGroup();
+            }
             $('.m-dialog').css("display", "block");
             $('input[type="text"], input[type="email"]').val(null);
             $('.checked').prop('checked', true);
@@ -192,7 +193,6 @@ class BaseJS {
                         var td = $(`<td></td>`);
                         var fieldName = $(th).attr('fieldName');
                         var value = obj[fieldName];
-
                         var formatType = $(th).attr('formatType');
                         switch (formatType) {
                             case "ddmmyyyy":
@@ -207,6 +207,9 @@ class BaseJS {
                                 break;
                             case "Gender":
                                 value = formatGender(value);
+                                break;
+                            case "WorkStatus":
+                                value = formatWorkSatus(value);
                                 break;
                             default:
                                 break;
@@ -223,6 +226,5 @@ class BaseJS {
         } catch (e) {
             console.log(e);
         }
-
     }
 }
