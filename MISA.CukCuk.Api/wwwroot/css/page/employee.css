@@ -39,3 +39,10 @@
     margin: 6px 0 10px 201px;
     
 }
+.salary-input{
+    position: absolute;
+    right: 40px;
+    line-height: 40px;
+    font-style: italic;
+    color: #808080;
+}

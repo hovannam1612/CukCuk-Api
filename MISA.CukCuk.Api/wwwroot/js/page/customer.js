@@ -1,35 +1,19 @@
 ﻿$(function () {
     new CustomerJS();
 })
-
+/**----------------------------------
+ * Class quản lý các sự kiện cho trang Customer
+ * CreatedBy: HVNAM (21/1/2021)
+ * */
 class CustomerJS extends BaseJS {
     constructor() {
         super();
     }
 
+    /**
+     * Gán địa chỉ router khách hàng
+     * */
     setApiRouter() {
         this.getApiRouter = "/api/v1/customers";
-    }
-
-    /**--------------------------------------
-     * Load comboBox nhóm khách hàng
-     * CreatedBy: HVNAM (12/1/2021)
-     * */
-    loadComboBoxCustomerGroup() {
-        var select = $('select#cbCustomerGroupName').empty();
-        // Lấy dữ liệu nhóm khách hàng
-        $.ajax({
-            url: this.host + "/api/v1/customergroups",
-            method: 'GET',
-        }).done(function (res) {
-            if (res) {
-                $.each(res, function (index, obj) {
-                    var option = $(`<option value="${obj.CustomerGroupId}">${obj.CustomerGroupName}</option>`);
-                    select.append(option);
-                })
-            }
-        }).fail(function (res) {
-
-        })
     }
 }

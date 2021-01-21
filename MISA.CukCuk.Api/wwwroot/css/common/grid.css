@@ -36,3 +36,6 @@ th, td {
      text-overflow: ellipsis;
      white-space: nowrap;
  }
+.row-selected {
+    background-color: #349e7a;
+}
