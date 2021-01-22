@@ -1,4 +1,3 @@
-
 /**
  * Class cha dùng chung
  * CreatedBy: HVNAM (21/1/2021)
@@ -89,7 +88,8 @@ class BaseJS {
                     entity[propertyName] = value;
                     
                 })
-                // Phân biệt phương thức thêm vào sửa
+
+                // Phân biệt phương thức thêm và sửa
                 var method = "POST";
                 var url = me.getApiRouter;
                 if (me.FormMode == "Edit") {
@@ -117,7 +117,7 @@ class BaseJS {
                             alert("Thêm thành công");
                         alert("Sửa thành công");
                     }
-                    // Đưa ra thông báo - ẩn form - load lại dữ liệu
+                    //ẩn form và load lại dữ liệu
                     $('.m-dialog').css("display", "none");
                     me.loadData();
                 }).fail(function (res) {
@@ -146,8 +146,8 @@ class BaseJS {
         * */
         $('table tbody').on('dblclick', 'tr', function () {
             me.FormMode = 'Edit';
-
             $('input').removeClass('border-red');
+
             // load dữ liệu cho các combobox
             me.loadComboBox();
 
@@ -242,6 +242,31 @@ class BaseJS {
                 $(this).removeClass('border-red');
                 $(this).attr('validate', true);
             }
+        })
+
+        /**-------------------------------
+         * Xóa một bản ghi
+         * CreatedBy: HVNAM (21/1/2021)
+         **/
+        $('#btnDelete').click(function () {
+            var entityId = me.recordId;
+            var url = me.getApiRouter + `/${entityId}`;
+            $.ajax({
+                url: url,
+                method: "DELETE",
+                contentType: 'application/json'
+            }).done(function (res) {
+                //Đưa ra thông báo
+                if (res) {
+                    alert("Xóa thành công");
+                    alert(res);
+                }
+                //Ẩn dialog và load lại dữ liệu table
+                $('.m-dialog').css("display", "none");
+                me.loadData();
+            }).fail(function (res) {
+                alert("xóa thất bại");
+            })
         })
     }
 
