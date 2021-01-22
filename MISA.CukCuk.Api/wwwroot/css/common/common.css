@@ -1,4 +1,4 @@
-﻿.text-align-right {
+.text-align-right {
     text-align: right;
 }
 
@@ -47,3 +47,31 @@
         transform: rotate(360deg);
     }
 }
+
+.alert {
+    display: flex;
+    position: absolute;
+    background-color: #BAFFE7;
+    height: 48px;
+    border-radius: 4px;
+    padding: 0 10px;
+    align-items: center;
+    top: 20px;
+    left: 50%;
+    margin-left: -110px;
+}
+    .alert .alert-text {
+        padding: 0 40px 0 10px;
+        font-size: 13px;
+        color: #000000;
+    }
+    .alert .icon-close {
+        
+    }
+    .alert .fas {
+        width: 24px;
+        height: 24px;
+        font-size: 24px;
+        line-height: 24px;
+        color: #019160;
+    }

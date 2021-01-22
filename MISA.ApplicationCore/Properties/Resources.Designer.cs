@@ -61,6 +61,69 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string Enum_Gender_Female {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string Enum_Gender_Male {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không xác định.
+        /// </summary>
+        public static string Enum_Gender_Other {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đã nghỉ việc.
+        /// </summary>
+        public static string Enum_WorkStatus_Resign {
+            get {
+                return ResourceManager.GetString("Enum_WorkStatus_Resign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đã nghỉ hưu.
+        /// </summary>
+        public static string Enum_WorkStatus_Retired {
+            get {
+                return ResourceManager.GetString("Enum_WorkStatus_Retired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đang thử việc.
+        /// </summary>
+        public static string Enum_WorkStatus_TrainWork {
+            get {
+                return ResourceManager.GetString("Enum_WorkStatus_TrainWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đang làm việc.
+        /// </summary>
+        public static string Enum_WorkStatus_Working {
+            get {
+                return ResourceManager.GetString("Enum_WorkStatus_Working", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Có lỗi xảy ra vui lòng liên hệ MISA.
         /// </summary>
         public static string Error_Exception {

@@ -12,7 +12,7 @@ input, select {
         font-family: GoogleSans-Regular;
     }
 
-    input:focus {
+    input:focus, select:focus {
         border: 1px solid #019160;
     }
 

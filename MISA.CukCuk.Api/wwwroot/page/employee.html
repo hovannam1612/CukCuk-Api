@@ -66,7 +66,7 @@
         </div>
         <div class="account-infor">
             <div class="account-avatar"></div>
-            <div class="account-name">Nguyễn Văn Mạnh</div>
+            <div class="account-name">Hồ Văn Nam</div>
             <div class="account-option icon-option-default-20"></div>
         </div>
     </div>
@@ -172,14 +172,12 @@
                                 <div class="m-col">
                                     <div class="m-label">Giới tính</div>
                                     <div class="m-control">
-                                        <select id="cbGender" fieldName="Gender" fieldValue="GenderName">
-                                            <option value="0">Nữ</option>
-                                            <option value="1">Nam</option>
-                                            <option value="2">Không xác định</option>
+                                        <select id="cbGender" fieldName="GenderName" fieldValue="Gender" api="/api/v1/enums/gender">
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="m-row">
                                 <div class="m-col">
                                     <div class="m-label">Số CMTNV/Căn cước(<span>*</span>)</div>
@@ -188,7 +186,7 @@
                                 <div class="m-col">
                                     <div class="m-label">Cấp ngày</div>
                                     <div class="m-control">
-                                        <input type="date" fieldName="IdentityDate" name="gender" />
+                                        <input type="date" fieldName="IdentityDate" />
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +223,7 @@
                                 <div class="m-col">
                                     <div class="m-label">Phòng ban</div>
                                     <div class="m-control">
-                                        <select id="cbDepartmentName" fieldName="DepartmentName" fieldValue="DepartmentValue" api="/api/v1/departments">
+                                        <select id="cbDepartmentName" fieldName="DepartmentName" fieldValue="DepartmentId" api="/api/v1/departments">
                                         </select>
                                     </div>
                                 </div>
@@ -251,9 +249,7 @@
                                 <div class="m-col">
                                     <div class="m-label">Tình trạnh công việc</div>
                                     <div class="m-control">
-                                        <select id="cbWorkStatus" fieldName="WorkStatus">
-                                            <option value="0">Đã nghỉ việc</option>
-                                            <option value="1">Đang làm việc</option>
+                                        <select id="cbWorkStatus" fieldName="WorkSatusName" fieldValue="WorkStatus" api="/api/v1/enums/workstatus">
                                         </select>
                                     </div>
                                 </div>
@@ -269,10 +265,14 @@
                             Huỷ
                         </div>
                     </button>
+                    <button id="btnDelete" class="m-btn btn-delete">
+                        <div class="text-delete">Xóa</div>
+                    </button>
                     <button id="btnSave" class="m-btn btn-save">
                         <div class="icon-save"><i class="far fa-save"></i></div>
                         <div class="text-save">Lưu</div>
                     </button>
+
                 </div>
             </div>
         </div>
@@ -281,10 +281,18 @@
         <div class="loading-modal"></div>
         <div class="loading-icon"></div>
     </div>
+    <div class="alert alert-success">
+        <div class="icon-success fas fa-check-circle"></div>
+        <div class="alert-text">Thêm thành công</div>
+        <div class="btn-alert-close fas fa-times"></div>
+    </div>
+
+    
     <script src="/lib/jquery-3.5.1.min.js"></script>
     <script src="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="/js/page/employee.js"></script>
 </body>
 </html>

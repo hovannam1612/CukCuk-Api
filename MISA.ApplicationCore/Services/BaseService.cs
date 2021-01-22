@@ -94,7 +94,7 @@ namespace MISA.ApplicationCore.Services
                 if (property.IsDefined(typeof(Required), false))
                 {
                     //Check bắt buộc nhập
-                    if (propertyValue == null)
+                    if (propertyValue == null || propertyValue.ToString()=="")
                     {
                         isValid = false;
                         errorMesages.Add(string.Format(Properties.Resources.Msg_Required, displayName));

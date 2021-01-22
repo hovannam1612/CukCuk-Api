@@ -171,7 +171,6 @@ span {
     }
 
         .dialog-footer-button button:last-child {
-            margin-left: 16px;
         }
 
 .btnSave {
@@ -187,14 +186,23 @@ span {
     font-size: 17px;
 }
 
-.btn-cancel {
-    background-color: #ccc;
+.btn-delete {
+    margin: 0 16px;
+    background-color: #F65454;
 }
 
+    .btn-delete:hover {
+        background-color: #fb7878;
+    }
+.text-delete{
+    margin: 0 auto;
+}
+.btn-cancel {
+    background-color: #BBBBBB;
+}
     .btn-cancel:hover {
         background-color: #9a9999;
     }
-
 .text-cancel {
     margin: 0 auto;
     color: #000000;

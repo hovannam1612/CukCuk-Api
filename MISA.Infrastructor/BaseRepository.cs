@@ -98,6 +98,7 @@ namespace MISA.Infrastructor
                 {
                     var dynamicParameters = MappingDataType(entityId);
                     rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+                    transaction.Commit();
                 }
                 catch (Exception)
                 {
@@ -132,6 +133,7 @@ namespace MISA.Infrastructor
             return dynamicParameters;
         }
 
+
         public T GetEntityByProperty(T entity, PropertyInfo propertyInfo)
         {
             var propertyName = propertyInfo.Name;
@@ -149,7 +151,7 @@ namespace MISA.Infrastructor
         }
 
         /// <summary>
-        /// Tụ động Đóng kết nối 
+        /// Tự động Đóng kết nối 
         /// </summary>
         public void Dispose()
         {

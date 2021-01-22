@@ -1,3 +1,4 @@
+
 /**
  * Class cha dùng chung
  * CreatedBy: HVNAM (21/1/2021)
@@ -27,11 +28,13 @@ class BaseJS {
          */
         $('#btnAdd').click(function () {
             try {
+                me.FormMode = "Add";
                 //Hiện thị dialog
                 $('.m-dialog').css("display", "block");
                 $('input[type="text"], input[type="email"]').val(null);
                 $('.checked').prop('checked', true);
                 $('.m-dialog input')[0].focus();
+                $('input').removeClass('border-red');
                 // Load dữ liệu cho combobox
                 me.loadComboBox();
             } catch (e) {
@@ -66,13 +69,7 @@ class BaseJS {
                 $.each(inputValidates, function (index, item) {
                     $(item).trigger('blur');
                 })
-                var inputNotValids = $('input[validate="false"]');
-                if (inputNotValids && inputNotValids.length > 0) {
-                    alert('Dữ liệu không hợp lệ vui lòng kiểm tra lại');
-                    // Focus vào input đang bị trống hoặc sai dữ liệu
-                    inputNotValids[0].focus();
-                    return;
-                }
+
                 //Lấy tất cả các control nhập liệu
                 var inputs = $('input[fieldName], select[fieldName]');
                 var entity = {};
@@ -85,26 +82,55 @@ class BaseJS {
                             entity[propertyName] = value;
                         }
                     }
-                    else
+                    if (this.tagName == "SELECT") {
+                        propertyName = $(this).attr('fieldValue');
                         entity[propertyName] = value;
+                    }
+                    entity[propertyName] = value;
+                    
                 })
+                // Phân biệt phương thức thêm vào sửa
+                var method = "POST";
+                var url = me.getApiRouter;
+                if (me.FormMode == "Edit") {
+                    method = "PUT";
+                    url = me.getApiRouter + `/${me.recordId}`;
+                    entity.EmployeeId = me.recordId;
+                }
+
                 // Gọi service tương ứng thực hiện lưu dữ liệu
                 $.ajax({
-                    url: me.host + me.getApiRouter,
-                    method: 'POST',
+                    url: url,
+                    method: method,
                     data: JSON.stringify(entity),
                     contentType: 'application/json',
                 }).done(function (res) {
+                    var inputNotValids = $('input[validate="false"]');
+                    if (inputNotValids && inputNotValids.length > 0) {
+                        // Focus vào input đang bị trống hoặc sai dữ liệu
+                        inputNotValids[0].focus();
+                        var msg = JSON.parse(res.responseText);
+                        alert(msg.Data);
+                    }
+                    else {
+                        if (method == "POST")
+                            alert("Thêm thành công");
+                        alert("Sửa thành công");
+                    }
                     // Đưa ra thông báo - ẩn form - load lại dữ liệu
-                    alert('Thêm thành công');
                     $('.m-dialog').css("display", "none");
                     me.loadData();
                 }).fail(function (res) {
+                    var msg = JSON.parse(res.responseText);
+                    alert(msg.Data);
+
                 })
             } catch (e) {
                 console.log(e);
             }
         })
+
+
 
         /**---------------------------------------
         * Sự kiện click khi nhấn button [Hủy]
@@ -119,7 +145,9 @@ class BaseJS {
         * CreatedBy: HVNam (12/1/2021)
         * */
         $('table tbody').on('dblclick', 'tr', function () {
-            
+            me.FormMode = 'Edit';
+
+            $('input').removeClass('border-red');
             // load dữ liệu cho các combobox
             me.loadComboBox();
 
@@ -154,18 +182,18 @@ class BaseJS {
                         } else {
                             this.checked = false;
                         }
-                    } 
-                    
+                    }
+                    // Đối với các input là date:
+                    if ($(this).attr('type') == "date") {
+                        var date = new Date(value);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        value = year + "-" + month + "-" + day;
+                    }
                     $(this).val(value);
-                    
-                    // Check với trường hợp input là radio, thì chỉ lấy value của input có attribute là checked:
-                    //if ($(this).attr('type') == "radio") {
-                    //    if (this.checked) {
-                    //        entity[propertyName] = value;
-                    //    }
-                    //} else {
-                    //    entity[propertyName] = value;
-                    //}
                 })
             }).fail(function (res) {
 
@@ -173,6 +201,13 @@ class BaseJS {
 
             $('.m-dialog').css("display", "block");
         })
+        /*
+                $("input[type=date]").on("change", function () {
+                    this.setAttribute(
+                        "data-date",
+                        moment(this.value, "YYYY-MM-DD").format(this.getAttribute("data-date-format"))
+                    )
+                }).trigger("change")*/
 
         /**---------------------------------------
         * Validate bắt buộc nhập
@@ -224,12 +259,11 @@ class BaseJS {
                 url: me.host + me.getApiRouter,
                 method: "GET",
             }).done(function (res) {
-                
+
                 //Lấy thông tin từ các cột dữ liệu
                 $.each(res, function (index, obj) {
                     var tr = $(`<tr></tr>`);
-
-                    //Gán 
+                    //Gán id bản ghi khi click
                     $(tr).data('recordId', obj.EmployeeId);
                     //Lấy thông tin dữ liệu map với các thuộc tính fieldName
                     $.each(ths, function (index, th) {

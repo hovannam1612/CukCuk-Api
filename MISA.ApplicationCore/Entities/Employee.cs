@@ -56,6 +56,9 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số chứng minh thư / căn cước
         /// </summary>
+        [Required]
+        [Duplicated]
+        [DisplayName("Số chứng minh thư hoặc căn cước")]
         public string IdentityNumber { get; set; }
 
         /// <summary>
