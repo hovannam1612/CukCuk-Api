@@ -1,4 +1,4 @@
-/*dialog*/
+/* Dialog */
 .m-dialog {
     display: none;
 }
@@ -13,6 +13,7 @@ span {
 
 .m-dialog select {
     height: 40px;
+    padding-left: 16px;
 }
 
 .m-dialog .m-label {
@@ -62,23 +63,23 @@ span {
     top: 0;
 }
 
-    .dialog-header .dialog-header-close button {
-        width: 30px;
-        height: 30px;
-        border-radius: 0 5px 0 5px;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background-image: url('/content/common/icon/x.svg');
-        background-color: #ffffff;
-        background-repeat: no-repeat;
-        background-position: center;
-        opacity: .7;
-    }
+.dialog-header-close button {
+    width: 30px;
+    height: 30px;
+    border-radius: 0 5px 0 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-image: url('/content/common/icon/x.svg');
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: .7;
+}
 
-        .dialog-header .dialog-header-close button:hover {
-            background-color: #ccc;
-        }
+    .dialog-header-close button:hover {
+        background-color: #ccc;
+    }
 
 .dialog-body {
     padding: 24px 0 0 0;
@@ -153,7 +154,7 @@ span {
 
 .dialog-footer {
     height: 60px;
-    background-color: #ccc;
+    background-color: #E5E5E5;
     border-radius: 0 0 5px 5px;
     position: relative;
     clear: both;
@@ -194,15 +195,19 @@ span {
     .btn-delete:hover {
         background-color: #fb7878;
     }
-.text-delete{
+
+.text-delete {
     margin: 0 auto;
 }
+
 .btn-cancel {
-    background-color: #BBBBBB;
+    background-color: #E5E5E5;
 }
+
     .btn-cancel:hover {
-        background-color: #9a9999;
+        background-color: #DADCE0;
     }
+
 .text-cancel {
     margin: 0 auto;
     color: #000000;

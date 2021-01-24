@@ -145,7 +145,10 @@
     <value>Xóa thành công</value>
   </data>
   <data name="Msg_Duplicated" xml:space="preserve">
-    <value>Thông tin {0} đã có trên hệ thống</value>
+    <value>{0} đã có trên hệ thống</value>
+  </data>
+  <data name="Msg_Email" xml:space="preserve">
+    <value>Email không hợp lệ</value>
   </data>
   <data name="Msg_Inserted" xml:space="preserve">
     <value>Thêm thành công</value>
@@ -154,7 +157,7 @@
     <value>Dữ liệu không hợp lệ</value>
   </data>
   <data name="Msg_Required" xml:space="preserve">
-    <value>Thông tin {0} không được phép để trống</value>
+    <value>{0} không được phép để trống</value>
   </data>
   <data name="Msg_Updated" xml:space="preserve">
     <value>Sửa thành công</value>

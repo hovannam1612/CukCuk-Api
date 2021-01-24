@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MISA.ApplicationCore.Services
 {
@@ -40,7 +41,7 @@ namespace MISA.ApplicationCore.Services
 
         public T GetById(Guid entityId)
         {
-            return _baseRepository.GetById(entityId); 
+            return _baseRepository.GetById(entityId);
         }
 
         public ServiceResult Insert(T entity)
@@ -94,7 +95,7 @@ namespace MISA.ApplicationCore.Services
                 if (property.IsDefined(typeof(Required), false))
                 {
                     //Check bắt buộc nhập
-                    if (propertyValue == null || propertyValue.ToString()=="")
+                    if (propertyValue == null || propertyValue.ToString() == "")
                     {
                         isValid = false;
                         errorMesages.Add(string.Format(Properties.Resources.Msg_Required, displayName));
@@ -123,6 +124,21 @@ namespace MISA.ApplicationCore.Services
                     {
                         isValid = false;
                         errorMesages.Add(msg);
+                        _serviceResult.MISACode = MISACode.NotValid;
+                        _serviceResult.Messeger = Properties.Resources.Msg_IsNotValid;
+                    }
+                }
+                if (property.IsDefined(typeof(Email), false))
+                {
+                    var value = propertyValue.ToString();
+                    //Regex format email
+                    string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+                    var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                    var email = regex.IsMatch(value);
+                    if (email == false)
+                    {
+                        isValid = false;
+                        errorMesages.Add(Properties.Resources.Msg_Email);
                         _serviceResult.MISACode = MISACode.NotValid;
                         _serviceResult.Messeger = Properties.Resources.Msg_IsNotValid;
                     }

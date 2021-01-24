@@ -153,6 +153,7 @@ namespace MISA.Infrastructor
         /// <summary>
         /// Tự động Đóng kết nối 
         /// </summary>
+        /// CreatedBy: HVNAM(24/1/2021)
         public void Dispose()
         {
             if (_dbConnection.State == ConnectionState.Open)

@@ -1,3 +1,4 @@
+/*Menu trái*/
 .navbar {
     float: left;
     width: 220px;
@@ -8,7 +9,7 @@
 
     .navbar .logo-site {
         height: 60px;
-        width:auto;
+        width: auto;
     }
 
     .navbar .box-logo {
@@ -16,20 +17,22 @@
         position: absolute;
         top: 12px;
         left: 16px;
+        align-items: center;
     }
 
         .navbar .box-logo .toggle-icon {
-            height: 24px;
-            width: 24px;
+            height: 26px;
+            width: 26px;
             background-image: url('/content/common/img/toggle.png');
             background-repeat: no-repeat;
             background-size: contain;
+            background-position: center;
             margin-right: 10px;
         }
 
     /*Logo site*/
     .navbar .logo-site .amis-logo {
-        height: 24px;
+        height: 30px;
         width: 200px;
         background-image: url('/content/common/img/cukcuk-logo.png');
         background-size: contain;
@@ -72,7 +75,7 @@
 }
 
 .nav-item .nav-item-sell {
-    background-image: url('/content/common/icon/dic-employee.png');
+    background-image: url('/content/common/icon/document-online.png');
 }
 
 .nav-item .nav-item-client {

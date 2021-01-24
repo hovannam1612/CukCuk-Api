@@ -1,41 +1,45 @@
-﻿.grid {
+﻿/* Bảng dữ liệu*/
+.grid {
     overflow-x: auto;
-    /*overflow-y: hidden;*/
     margin-top: 10px;
     height: calc(100vh - 226px);
     padding: 0 16px;
 }
 
-.grid thead th {
-    position: sticky;
-    top: 0px;
-    z-index: 5;
-    background: #ffffff;
-}
+    .grid thead th {
+        position: sticky;
+        top: 0px;
+        z-index: 5;
+        background: #ffffff;
+    }
 
     .grid tbody tr:nth-child(2n+1) {
         background-color: #e1e1e1;
     }
-.grid tbody tr:hover {
-    background-color: #cecdcd;
-    cursor: pointer;
-}
+
+    .grid tbody tr:hover {
+        background-color: #cecdcd;
+        cursor: pointer;
+    }
+
 th, td {
     border-bottom: 1px solid #bbbbbb;
-    padding:9px 16px;
+    padding: 9px 16px;
     text-align: left;
     white-space: nowrap;
 }
 
- th:last-child{
-     max-width: 150px;
- }
- td:last-child{
-     max-width: 150px;
-     overflow: hidden;
-     text-overflow: ellipsis;
-     white-space: nowrap;
- }
+    th:last-child {
+        max-width: 150px;
+    }
+
+    td:last-child {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
 .row-selected {
     background-color: #349e7a;
 }

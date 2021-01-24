@@ -11,6 +11,7 @@ namespace MISA.ApplicationCore.Services
         #region Declare
         IPositionRepository _positionRepository;
         #endregion
+
         #region Constructor
         public PositionService(IPositionRepository positionRepository) : base(positionRepository)
         {

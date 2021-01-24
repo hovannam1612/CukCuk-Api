@@ -1,6 +1,8 @@
-.m-dialog{
-    display:none;
+/*CSS Form Nhân viên*/
+.m-dialog {
+    display: none;
 }
+
     .m-dialog .dialog-content {
         zoom: 90%;
         width: 700px;
@@ -8,25 +10,31 @@
         margin-top: -405px;
         margin-left: -350px;
     }
+
 .e-dialog-img {
     float: left;
     height: 640px;
     width: 186px;
 }
-.m-dialog input[type=date]{
+
+.m-dialog input[type=date] {
     padding-right: 10px;
     width: 189px;
 }
-.m-dialog input{
+
+.m-dialog input {
     width: 199px;
 }
+
 .m-dialog select {
     width: 218px;
 }
-.m-dialog .m-col{
+
+.m-dialog .m-col {
     padding-left: 16px;
 }
-.e-dialog-title{
+
+.e-dialog-title {
     font-size: 13px;
     font-weight: bold;
     margin-left: 202px;
@@ -37,12 +45,22 @@
     height: 3px;
     background-color: #019160;
     margin: 6px 0 10px 201px;
-    
 }
-.salary-input{
+
+.salary-input {
     position: absolute;
     right: 40px;
     line-height: 40px;
     font-style: italic;
     color: #808080;
+}
+
+.e-margin-left-btn {
+    margin-left: 16px;
+}
+
+.filter-left select {
+    height: 40px;
+    padding: 0 10px;
+    margin-left: 10px;
 }

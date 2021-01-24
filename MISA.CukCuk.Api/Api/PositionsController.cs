@@ -14,6 +14,7 @@ namespace MISA.CukCuk.Api.Api
         #region Declare
         IPositionService _positionService;
         #endregion
+
         #region Constructor
         public PositionsController(IPositionService positionService) : base (positionService)
         {
@@ -21,6 +22,8 @@ namespace MISA.CukCuk.Api.Api
         }
         #endregion
 
+        #region Method
+        #endregion
 
     }
 }

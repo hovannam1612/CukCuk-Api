@@ -1,3 +1,4 @@
+/* Header */
 .header {
     float: left;
     width: calc(100% - 222px);
@@ -26,7 +27,7 @@
         right: 16px;
     }
 
-    /*avatar-img*/
+    /*Avatar-img*/
     .header .account-avatar {
         width: 20px;
         height: 20px;

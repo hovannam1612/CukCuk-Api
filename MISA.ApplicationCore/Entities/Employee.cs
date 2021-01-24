@@ -49,12 +49,12 @@ namespace MISA.ApplicationCore.Entities
         public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
-        /// Giới tính (0-Nữ; 1-Nam; 2-Khác)
+        /// Giới tính (0-Nữ; 1-Nam; 2-Không xác định)
         /// </summary>
         public int? Gender { get; set; }
 
         /// <summary>
-        /// Số chứng minh thư / căn cước
+        /// Số chứng minh thư hoặc căn cước
         /// </summary>
         [Required]
         [Duplicated]
@@ -76,6 +76,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         [Required]
         [Duplicated]
+        [Email]
         [DisplayName("Email")]
         public string Email { get; set; }
 
@@ -103,7 +104,7 @@ namespace MISA.ApplicationCore.Entities
         public DateTime? JoinDate { get; set; }
 
         /// <summary>
-        /// Trạng thái công việc (0-đã nghỉ việc ; 1:Đang làm việc)
+        /// Trạng thái công việc (0:Đã nghỉ việc ; 1:Đang làm việc; 2: Đang thử việc; 3:Đã nghỉ hưu )
         /// </summary>
         public int WorkStatus { get; set; }
 

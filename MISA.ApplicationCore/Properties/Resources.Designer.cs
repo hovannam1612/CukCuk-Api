@@ -142,11 +142,20 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thông tin {0} đã có trên hệ thống.
+        ///   Looks up a localized string similar to {0} đã có trên hệ thống.
         /// </summary>
         public static string Msg_Duplicated {
             get {
                 return ResourceManager.GetString("Msg_Duplicated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email không hợp lệ.
+        /// </summary>
+        public static string Msg_Email {
+            get {
+                return ResourceManager.GetString("Msg_Email", resourceCulture);
             }
         }
         
@@ -169,7 +178,7 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thông tin {0} không được phép để trống.
+        ///   Looks up a localized string similar to {0} không được phép để trống.
         /// </summary>
         public static string Msg_Required {
             get {

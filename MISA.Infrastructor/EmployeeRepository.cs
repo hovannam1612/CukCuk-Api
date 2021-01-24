@@ -4,8 +4,10 @@ using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -19,6 +21,17 @@ namespace MISA.Infrastructor
         #region Constructor
         public EmployeeRepository(IConfiguration configuration) : base(configuration)
         {
+        }
+
+        public IEnumerable getEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
+        {
+            return null;
+        }
+
+        public IEnumerable getMaxEmployeeCode()
+        {
+            var maxEmployeeCode = _dbConnection.Query("Proc_getEmployeeCodeMax", commandType: CommandType.StoredProcedure).FirstOrDefault();
+            return maxEmployeeCode;
         }
         #endregion
     }

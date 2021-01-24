@@ -20,20 +20,6 @@ namespace MISA.ApplicationCore
         #endregion
 
         #region Method
-
-       /* public override int Insert(Customer entity)
-        {
-            //validate thông tin 
-            var isValid = true;
-            // 1. Check trùng mã
-            var customerDuplicate = _customerRepository.GetCustomerByCode(entity.CustomerCode);
-            if(customerDuplicate != null)
-                isValid = false;
-            if (isValid == true)
-                return base.Insert(entity);
-            else
-                return 0;
-        }*/
         public IEnumerable<Customer> GetCustomerPaging(int limit, int offset)
         {
             throw new NotImplementedException();

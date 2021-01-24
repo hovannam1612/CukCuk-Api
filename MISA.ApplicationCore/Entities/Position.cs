@@ -13,6 +13,7 @@ namespace MISA.ApplicationCore.Entities
     {
         #region Declare
         #endregion
+
         #region Contructor
         public Position()
         {
@@ -41,6 +42,7 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         public string Description { get; set; }
         #endregion
+        
         #region Method
         #endregion
 

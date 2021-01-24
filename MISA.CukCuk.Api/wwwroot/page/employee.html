@@ -6,13 +6,13 @@
     <link rel="icon" href="/content/common/icon/favicon.png" type="image/x-icon">
     <link href="/css/common/main.css" rel="stylesheet" />
     <link href="/css/common/common.css" rel="stylesheet" />
+    <link href="/css/common/input.css" rel="stylesheet" />
     <link href="/css/common/toolbar.css" rel="stylesheet" />
     <link href="/css/common/button.css" rel="stylesheet" />
     <link href="/css/common/dialog.css" rel="stylesheet" />
+    <link href="/css/common/popup.css" rel="stylesheet" />
     <link href="/css/common/radio.css" rel="stylesheet" />
-    <link href="/css/common/input.css" rel="stylesheet" />
     <link href="/css/common/grid.css" rel="stylesheet" />
-    <link href="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" />
     <link href="/css/common/icon.css" rel="stylesheet" />
     <link href="/css/common/navbar.css" rel="stylesheet" />
     <link href="/css/common/header.css" rel="stylesheet" />
@@ -82,13 +82,14 @@
         </div>
         <div class="filter-bar">
             <div class="filter-left">
-                <input class="icon-search" type="text" placeholder="Tìm kiếm theo mã, tên nhân viên" style="width:200px;" />
-                <!--<select>
-                    <option>Phòng đào tạo</option>
-                    <option>Phòng đào tạo</option>
-                    <option>Phòng đào tạo</option>
-                    <option>Phòng đào tạo</option>
-                </select>-->
+                <input class="icon-search" type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại" />
+                <select id="cbDepartmentFilter" fieldName="DepartmentName" fieldValue="DepartmentId" api="/api/v1/departments">
+                    <option>Tất cả phòng ban</option>
+                </select>
+                <select id="cbPositionFilter" fieldName="PositionName" fieldValue="PositionId" api="/api/v1/positions">
+                    <option>Tất cả vị trí</option>
+                </select>
+
             </div>
             <div class="filter-right">
                 <button id="btnRefresh" class="m-btn-second m-btn-refresh"></button>
@@ -236,7 +237,7 @@
                                 <div class="m-col">
                                     <div class="m-label">Mức lương cơ bản</div>
                                     <div class="m-control">
-                                        <input fieldName="Salary" type="text" style="text-align:right; padding-right: 56px; width: 144px" />
+                                        <input fieldName="Salary" type="text" class="salary-format" style="text-align:right; padding-right: 56px; width: 144px" />
                                         <span class="salary-input">(VNĐ)</span>
                                     </div>
                                 </div>
@@ -281,18 +282,35 @@
         <div class="loading-modal"></div>
         <div class="loading-icon"></div>
     </div>
-    <div class="alert alert-success">
-        <div class="icon-success fas fa-check-circle"></div>
-        <div class="alert-text">Thêm thành công</div>
-        <div class="btn-alert-close fas fa-times"></div>
+    <div class="alert-messages">
+        <div class="alert">
+            <div class="icon fas"></div>
+            <div class="alert-text"></div>
+            <div class="btn-alert-close fas fa-times"></div>
+        </div>
     </div>
 
-    
+    <div class="m-popup">
+        <div class="popup-modal"></div>
+        <div class="popup-content">
+            <div class="dialog-header-close" id="btnPopClose">
+                <button></button>
+            </div>
+            <div class="popup-title">Thông báo</div>
+            <div class="popup-infor">
+                <div class="popup-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="popup-text">Bạn có chắc chắn muốn xóa nhân viên này?</div>
+            </div>
+            <div class="popup-action">
+                <button class="m-btn" id="btnPopCancel">Hủy</button>
+                <button class="m-btn" id="btnPopDelete">Xóa</button>
+            </div>
+        </div>
+
+    </div>
     <script src="/lib/jquery-3.5.1.min.js"></script>
-    <script src="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="/js/page/employee.js"></script>
 </body>
 </html>

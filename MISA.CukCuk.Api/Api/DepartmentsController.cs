@@ -21,5 +21,8 @@ namespace MISA.CukCuk.Api.Api
             _departmentService = departmentService;
         }
         #endregion
+
+        #region Method
+        #endregion
     }
 }

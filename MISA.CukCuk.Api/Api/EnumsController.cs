@@ -12,6 +12,11 @@ namespace MISA.CukCuk.Api.Api
     [ApiController]
     public class EnumsController : ControllerBase
     {
+        /// <summary>
+        /// Lấy danh sách enum giới tính 
+        /// </summary>
+        /// <returns>Danh sách giới tính</returns>
+        /// CreatedBy: HVNAM (24/1/2021)
         [HttpGet("gender")]
         public IActionResult GetEnumsGender()
         {
@@ -30,6 +35,11 @@ namespace MISA.CukCuk.Api.Api
             return Ok(genders);
         }
 
+        /// <summary>
+        /// Lấy danh sách enum trạng thái công việc
+        /// </summary>
+        /// <returns>Danh sách trạng thái công việc</returns>
+        /// CreatedBy: HVNAM (24/1/2021)
         [HttpGet("workstatus")]
         public IActionResult GetEnumsWorkStatus()
         {

@@ -1,0 +1,103 @@
+﻿/* Pop-up thông báo*/
+
+.m-popup {
+    display: none;
+}
+
+.popup-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #808080;
+    opacity: 0.5;
+    z-index: 99999999999;
+}
+
+.m-popup .popup-content {
+    border-radius: 4px;
+    position: absolute;
+    padding: 24px 24px 60px 24px;
+    background-color: #ffffff;
+    color: #000000;
+    top: 50%;
+    left: 50%;
+    margin-left: -168px;
+    margin-top: -58px;
+    z-index: 99999999999999;
+}
+
+.m-popup .dialog-header-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.m-popup .popup-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.popup-infor {
+    display: flex;
+    padding: 24px 0;
+}
+
+    .popup-infor .popup-icon {
+        background-color: #ccc;
+        color: #F65454;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        margin-right: 10px
+    }
+
+.popup-icon i {
+    line-height: 26px;
+    margin-left: 5px;
+}
+
+.popup-infor .popup-text {
+    font-size: 13px;
+    align-self: center;
+}
+
+.popup-action {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+    background-color: #E5E5E5;
+    display: flex;
+    border-radius: 0 0 4px 4px;
+    align-items: center;
+}
+
+    .popup-action .m-btn {
+        width: 75px;
+        padding: 0px;
+        padding-left: 25px;
+    }
+
+        .popup-action .m-btn:last-child {
+            position: absolute;
+            right: 24px;
+            background-color: #F65454;
+        }
+
+            .popup-action .m-btn:last-child:hover {
+                background-color: #fb7878;
+            }
+
+        .popup-action .m-btn:first-child {
+            position: absolute;
+            right: 115px;
+            background-color: #E5E5E5;
+            color: #000000;
+        }
+
+            .popup-action .m-btn:first-child:hover {
+                background-color: #DADCE0;
+            }

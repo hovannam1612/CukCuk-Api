@@ -44,6 +44,7 @@ namespace MISA.ApplicationCore.Interfaces
 
         /// <summary>
         /// Xóa bản ghi theo id
+        /// </summary>
         /// <param name="entityId">id bản ghi cần xóa</param>
         /// <returns>Số lượng bản ghi bị ảnh hưởng (bị xóa)</returns>
         /// CreatedBy: HVNAM (17/1/2021)

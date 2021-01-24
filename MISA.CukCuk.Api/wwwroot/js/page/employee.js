@@ -13,6 +13,7 @@ class EmployeeJS extends BaseJS {
 
     /**
      * Gán địa chỉ router nhân viên
+     * CreatedBy: HVNAM (23/1/2021)
      * */
     setApiRouter() {
         this.getApiRouter = "/api/v1/employees";

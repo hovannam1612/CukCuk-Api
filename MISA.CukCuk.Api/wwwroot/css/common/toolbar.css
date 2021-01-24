@@ -1,12 +1,10 @@
-﻿
+﻿/* Toolbar Filter*/
 .filter-bar {
     height: 40px;
     padding: 0 16px;
     display: flex;
     align-items: center;
 }
-
-
 
     .filter-bar .filter-left {
     }
@@ -44,3 +42,7 @@
     .paging-bar .paging-option {
         display: flex;
     }
+
+.filter-bar input {
+    width: 240px;
+}

@@ -5,23 +5,40 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Entities
 {
+    /// <summary>
+    /// Attribute bắt buộc nhập
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
     [AttributeUsage(AttributeTargets.Property)]
     public class Required : Attribute
     {
 
     }
+
+    /// <summary>
+    /// Attribute Không được trùng
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
     [AttributeUsage(AttributeTargets.Property)]
     public class Duplicated : Attribute
     {
 
     }
 
+    /// <summary>
+    /// Attribute khóa chính
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
     [AttributeUsage(AttributeTargets.Property)]
     public class PrimaryKey : Attribute
     {
 
     }
 
+    /// <summary>
+    /// Attribute Hiện thị tên Property
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
     [AttributeUsage(AttributeTargets.Property)]
     public class DisplayName : Attribute
     {
@@ -34,7 +51,20 @@ namespace MISA.ApplicationCore.Entities
             this.Name = name;
         }
     }
+    /// <summary>
+    /// Attribute check Email hợp lệ
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
+    [AttributeUsage(AttributeTargets.Property)]
+    public class Email : Attribute
+    {
+        
+    }
 
+    /// <summary>
+    /// Attribute độ dài max của ký tự
+    /// </summary>
+    /// CreatedBy: HVNAM (21/1/2021)
     [AttributeUsage(AttributeTargets.Property)]
     public class MaxLength : Attribute
     {
@@ -52,6 +82,7 @@ namespace MISA.ApplicationCore.Entities
             this.ErrorMsg = errorMsg;
         }
     }
+
     public class BaseEntity
     {
         /// <summary>
