@@ -30,7 +30,6 @@ namespace MISA.CukCuk.Api.Api
         }
         #endregion
 
-
         #region Method
         /// <summary>
         /// Lấy mã nhân viên lớn nhất (không tính các ký tự chữ)

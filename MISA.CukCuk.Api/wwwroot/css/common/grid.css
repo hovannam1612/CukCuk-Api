@@ -1,11 +1,31 @@
-﻿/* Bảng dữ liệu*/
+/* Bảng dữ liệu*/
 .grid {
     overflow-x: auto;
     margin-top: 10px;
     height: calc(100vh - 226px);
-    padding: 0 16px;
+    padding: 0 0 0 16px;
 }
 
+/* width */
+.grid::-webkit-scrollbar {
+    width: 14px;
+    height: 10px;
+}
+
+/* Track */
+    .grid::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+/* Handle */
+    .grid::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+        .grid::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     .grid thead th {
         position: sticky;
         top: 0px;

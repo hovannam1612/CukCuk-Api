@@ -142,4 +142,3 @@ function formatAmount(salary) {
     x2 = x.length > 1 ? ',' + x[1] : '';
     return formatAmountNoDecimals(x1) + x2;
 }
-

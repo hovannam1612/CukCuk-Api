@@ -83,11 +83,10 @@ namespace MISA.Infrastructor
                 {
                     transaction.Rollback();
                 }
-
             }
             return rowAffects;
         }
-
+        
         public int Update(T entityId)
         {
             var rowAffects = 0;

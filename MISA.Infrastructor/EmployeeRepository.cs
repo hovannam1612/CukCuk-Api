@@ -22,7 +22,9 @@ namespace MISA.Infrastructor
         public EmployeeRepository(IConfiguration configuration) : base(configuration)
         {
         }
+        #endregion
 
+        #region Method
         public IEnumerable GetEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
         {
             return null;
