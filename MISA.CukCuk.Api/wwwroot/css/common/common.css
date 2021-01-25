@@ -57,9 +57,8 @@
 .alert-messages {
     display: none;
     position: absolute;
-    top: 0px;
-    left: 50%;
-    margin-left: -110px;
+    bottom: 0;
+    right: 20px;
     z-index: 999999999999999;
 }
 
@@ -95,6 +94,6 @@
 }
 
 .alert-danger {
-    background-color: #ff0000;
+    background-color: #FFEBEB;
     color: #d45e5e;
 }

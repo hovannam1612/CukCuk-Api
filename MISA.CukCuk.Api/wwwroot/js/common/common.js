@@ -99,7 +99,7 @@ function showMessage(msg, alert) {
         classIcon.removeClass("fa-exclamation-circle");
         classIcon.addClass("fa-exclamation-triangle");
     }//Messeges Lỗi
-    else {
+    else if (alert == "danger") {
         classAlert.removeClass("alert-warning");
         classAlert.removeClass("alert-success");
         classIcon.removeClass("fa-check-circle");
@@ -111,8 +111,8 @@ function showMessage(msg, alert) {
     text.empty();
     text.append(msg);
     $(".alert-messages").show();
-    $(".alert-messages").animate({ top: '50px' });
-    $(".alert-messages").fadeOut(4000);
+    $(".alert-messages").animate({ top: '600px' });
+    $(".alert-messages").fadeOut(5000);
 }
 
 /**----------------------------------------

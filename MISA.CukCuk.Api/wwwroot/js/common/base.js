@@ -11,6 +11,10 @@ class BaseJS {
         this.initEvent();
     }
 
+    /**------------------------------
+     * Gán api router của từng trang
+     * CreatedBy: HVNAM (21/1/2021)
+     * */
     setApiRouter() {
 
     }
@@ -141,7 +145,7 @@ class BaseJS {
                     $('.m-dialog').css("display", "none");
                     me.loadData();
                 }).fail(function (res) {
-                    var alert = "warning";
+                    var alert = "danger";
                     var msg = JSON.parse(res.responseText);
                     //Nếu có lỗi xảy ra
                     if (msg.Data.length > 0)

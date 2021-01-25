@@ -87,6 +87,7 @@ namespace MISA.Infrastructor
             return rowAffects;
         }
         
+        
         public int Update(T entityId)
         {
             var rowAffects = 0;
@@ -131,7 +132,6 @@ namespace MISA.Infrastructor
             }
             return dynamicParameters;
         }
-
 
         public T GetEntityByProperty(T entity, PropertyInfo propertyInfo)
         {
