@@ -40,7 +40,7 @@ namespace MISA.CukCuk.Api.Api
         [HttpGet("maxemployeecode")]
         public IActionResult GetMaxEmployeeCode()
         {
-            var maxCode =  _employeeService.getMaxEmployeeCode();
+            var maxCode =  _employeeService.GetMaxEmployeeCode();
             return Ok(maxCode);
         }
         #endregion

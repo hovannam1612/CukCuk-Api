@@ -23,12 +23,12 @@ namespace MISA.Infrastructor
         {
         }
 
-        public IEnumerable getEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
+        public IEnumerable GetEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
         {
             return null;
         }
 
-        public IEnumerable getMaxEmployeeCode()
+        public IEnumerable GetMaxEmployeeCode()
         {
             var maxEmployeeCode = _dbConnection.Query("Proc_getEmployeeCodeMax", commandType: CommandType.StoredProcedure).FirstOrDefault();
             return maxEmployeeCode;

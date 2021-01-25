@@ -13,7 +13,7 @@ namespace MISA.ApplicationCore.Interfaces
         /// </summary>
         /// <returns>Mã nhân viên lớn nhất</returns>
         /// CreatedBy: HVNAM (24/1/2021)
-        IEnumerable getMaxEmployeeCode();
+        IEnumerable GetMaxEmployeeCode();
 
         /// <summary>
         /// Lấy danh sách nhân viên theo các tiêu chí
@@ -23,6 +23,6 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="positionId">Mã chức vụ</param>
         /// <returns>Danh sách nhân viên theo các tiêu chí</returns>
         /// CreatedBy: HVNAM(24/1/2021)
-        IEnumerable getEmployeeFilter(string specs, Guid? departmentId, Guid? positionId);
+        IEnumerable GetEmployeeFilter(string specs, Guid? departmentId, Guid? positionId);
     }
 }

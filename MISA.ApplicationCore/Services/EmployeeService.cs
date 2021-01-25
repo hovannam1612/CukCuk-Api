@@ -20,14 +20,14 @@ namespace MISA.ApplicationCore.Services
             _employeeRepository = employeeRepository;
         }
 
-        public IEnumerable getEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
+        public IEnumerable GetEmployeeFilter(string specs, Guid? departmentId, Guid? positionId)
         {
             return null;
         }
 
-        public IEnumerable getMaxEmployeeCode()
+        public IEnumerable GetMaxEmployeeCode()
         {
-            return _employeeRepository.getMaxEmployeeCode();
+            return _employeeRepository.GetMaxEmployeeCode();
         }
         #endregion
 
